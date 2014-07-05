@@ -53,10 +53,11 @@
             "module": "twitter-stream-channels",
             "namespace": "",
             "file": "lib\\StreamChannels.js",
-            "line": 5,
+            "line": 7,
             "is_constructor": 1,
             "access": "private",
             "tagname": "",
+            "extends": "events.EventEmitter",
             "params": [
                 {
                     "name": "apiClient",
@@ -101,13 +102,35 @@
             "namespace": "",
             "file": "twitter-stream-channels.js",
             "line": 8,
-            "description": "Manage filters on multiple channels on the same Twitter Stream\n```js\nvar TwitterStreamChannels = require('twitter-stream-channels');\nvar credentials = require('my.twitter.credentials.json');\n\nvar client = new TwitterStreamChannels(credentials);\n\nvar channels = {\n   \"languages\" : ['javascript','php','java','python','perl'],\n   \"js-frameworks\" : ['angularjs','jquery','backbone','emberjs'],\n   \"web\" : ['javascript','nodejs','html5','css','angularjs']\n};\n\nvar stream = client.streamChannels(channels);\n\nstream.on('channels/languages',function(tweet){\n   console.log(tweet);//any tweet with 'javascript','php','java','python','perl'\n});\n\nstream.on('channels/js-frameworks',function(tweet){\n   console.log(tweet);//any tweet with 'angularjs','jquery','backbone','emberjs'\n});\n\nstream.on('channels/web',function(tweet){\n   console.log(tweet);//any tweet with 'javascript','nodejs','html5','css','angularjs'\n});\n\nstream.on('channels',function(tweet){\n   console.log(tweet);//any tweet with any of the keywords above\n});\n\n//whatever needs to close stream some time\nsetTimeout(function(){\n   stream.close();//closes the stream connected to Twitter \n},100000);\n```",
+            "description": "Manage filters on multiple channels on the same Twitter Stream\n```js\nvar TwitterStreamChannels = require('twitter-stream-channels');\nvar credentials = require('your.twitter.credentials.json');\n\nvar client = new TwitterStreamChannels(credentials);\n\nvar channels = {\n \"languages\" : ['javascript','php','java','python','perl'],\n \"js-frameworks\" : ['angularjs','jquery','backbone','emberjs'],\n \"web\" : ['javascript','nodejs','html5','css','angularjs']\n};\n\nvar stream = client.streamChannels(channels);\n\nstream.on('channels/languages',function(tweet){\n console.log(tweet);//any tweet with 'javascript','php','java','python','perl'\n});\n\nstream.on('channels/js-frameworks',function(tweet){\n console.log(tweet);//any tweet with 'angularjs','jquery','backbone','emberjs'\n});\n\nstream.on('channels/web',function(tweet){\n console.log(tweet);//any tweet with 'javascript','nodejs','html5','css','angularjs'\n});\n\nstream.on('channels',function(tweet){\n console.log(tweet);//any tweet with any of the keywords above\n});\n\n//whatever needs to close stream some time\nsetTimeout(function(){\n stream.stop();//closes the stream connected to Twitter \n},100000);\n```",
             "is_constructor": 1,
             "params": [
                 {
                     "name": "credentials",
                     "description": "",
-                    "type": "Type"
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "consumer_key",
+                            "description": "",
+                            "type": "String"
+                        },
+                        {
+                            "name": "consumer_secret",
+                            "description": "",
+                            "type": "String"
+                        },
+                        {
+                            "name": "access_token",
+                            "description": "",
+                            "type": "String"
+                        },
+                        {
+                            "name": "access_token_secret",
+                            "description": "",
+                            "type": "String"
+                        }
+                    ]
                 }
             ],
             "return": {
@@ -119,7 +142,20 @@
     "classitems": [
         {
             "file": "lib\\StreamChannels.js",
-            "line": 19,
+            "line": 25,
+            "description": "Call this function to restart the stream after you called `.stop()` on it.\n\nNote: there is no need to call `.start()` to begin streaming. ` TwitterStreamChannels.stream` calls .start() for you.",
+            "itemtype": "method",
+            "name": "start",
+            "return": {
+                "description": "",
+                "type": "StreamChannels"
+            },
+            "class": "StreamChannels",
+            "module": "twitter-stream-channels"
+        },
+        {
+            "file": "lib\\StreamChannels.js",
+            "line": 37,
             "description": "Closes the opened stream with Twitter",
             "itemtype": "method",
             "name": "stop",
@@ -131,15 +167,8 @@
                     "optional": true,
                     "props": [
                         {
-                            "name": "disableChannelsSubEmitters",
-                            "description": "If true, will not fire the events like 'channels/channelName'",
-                            "type": "Object",
-                            "optional": true,
-                            "optdefault": "false"
-                        },
-                        {
-                            "name": "disableChannelsEmitter",
-                            "description": "If true, will not fire the event 'channels'",
+                            "name": "removeAllListeners",
+                            "description": "If true removes all the listeners set on the stream",
                             "type": "Object",
                             "optional": true,
                             "optdefault": "false"
@@ -149,14 +178,34 @@
             ],
             "return": {
                 "description": "",
-                "type": "Undefined"
+                "type": "StreamChannels"
+            },
+            "class": "StreamChannels",
+            "module": "twitter-stream-channels"
+        },
+        {
+            "file": "lib\\StreamChannels.js",
+            "line": 51,
+            "description": "Removes all the listeners added\n\nSee more methods http://nodejs.org/api/events.html#events_events",
+            "itemtype": "method",
+            "name": "removeAllListeners",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "StreamChannels"
             },
             "class": "StreamChannels",
             "module": "twitter-stream-channels"
         },
         {
             "file": "twitter-stream-channels.js",
-            "line": 54,
+            "line": 58,
             "description": "Returns a Twitter API client on which you can do pretty much what you want.\nMore here https://github.com/ttezel/twit",
             "itemtype": "method",
             "name": "getApiClient",
@@ -169,7 +218,7 @@
         },
         {
             "file": "twitter-stream-channels.js",
-            "line": 64,
+            "line": 68,
             "description": "Opens a Twitter Stream and returns you an other one on which you'll be able to attach events for each channels",
             "itemtype": "method",
             "name": "streamChannels",
@@ -213,11 +262,19 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:5"
+            "line": " lib\\StreamChannels.js:7"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:19"
+            "line": " lib\\StreamChannels.js:25"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " lib\\StreamChannels.js:37"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " lib\\StreamChannels.js:51"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -225,11 +282,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " twitter-stream-channels.js:54"
+            "line": " twitter-stream-channels.js:58"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " twitter-stream-channels.js:64"
+            "line": " twitter-stream-channels.js:68"
         }
     ]
 }

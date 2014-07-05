@@ -91,10 +91,14 @@
     
 
     
+        <div class="extends">
+            Extends events.EventEmitter
+        </div>
+    
 
     
         <div class="foundat">
-            Defined in: <a href="../files/lib_StreamChannels.js.html#l5"><code>lib\StreamChannels.js:5</code></a>
+            Defined in: <a href="../files/lib_StreamChannels.js.html#l7"><code>lib\StreamChannels.js:7</code></a>
         </div>
     
 
@@ -176,7 +180,7 @@
             
         
         
-        <a href="../files/lib_StreamChannels.js.html#l5"><code>lib\StreamChannels.js:5</code></a>
+        <a href="../files/lib_StreamChannels.js.html#l7"><code>lib\StreamChannels.js:7</code></a>
         
         </p>
 
@@ -305,7 +309,21 @@
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method">
+                                <a href="#method_removeAllListeners">removeAllListeners</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_start">start</a>
+
+                                
+                                
+                            </li>
                         
                             <li class="index-item method">
                                 <a href="#method_stop">stop</a>
@@ -330,8 +348,8 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_stop" class="method item">
-    <h3 class="name"><code>stop</code></h3>
+                    <div id="method_removeAllListeners" class="method item">
+    <h3 class="name"><code>removeAllListeners</code></h3>
 
     
         <div class="args">
@@ -339,7 +357,7 @@
             
                 <li class="arg">
                     
-                        <code class="optional">[options]</code>
+                        <code>event</code>
                     
                 </li>
             
@@ -349,7 +367,7 @@
 
     
         <span class="returns-inline">
-            <span class="type">Undefined</span>
+            <span class="type"><a href="../classes/StreamChannels.html" class="crosslink">StreamChannels</a></span>
         </span>
     
 
@@ -376,7 +394,184 @@
             
         
         
-        <a href="../files/lib_StreamChannels.js.html#l19"><code>lib\StreamChannels.js:19</code></a>
+        <a href="../files/lib_StreamChannels.js.html#l51"><code>lib\StreamChannels.js:51</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Removes all the listeners added</p>
+<p>See more methods <a href="http://nodejs.org/api/events.html#events_events">http://nodejs.org/api/events.html#events_events</a></p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/StreamChannels.html" class="crosslink">StreamChannels</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_start" class="method item">
+    <h3 class="name"><code>start</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/StreamChannels.html" class="crosslink">StreamChannels</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_StreamChannels.js.html#l25"><code>lib\StreamChannels.js:25</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Call this function to restart the stream after you called <code>.stop()</code> on it.</p>
+<p>Note: there is no need to call <code>.start()</code> to begin streaming. <code>TwitterStreamChannels.stream</code> calls .start() for you.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/StreamChannels.html" class="crosslink">StreamChannels</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_stop" class="method item">
+    <h3 class="name"><code>stop</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[options]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/StreamChannels.html" class="crosslink">StreamChannels</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_StreamChannels.js.html#l37"><code>lib\StreamChannels.js:37</code></a>
         
         </p>
 
@@ -415,28 +610,13 @@
                             
                             <li class="param">
                                 
-                                    <code class="param-name optional">[disableChannelsSubEmitters=false]</code>
+                                    <code class="param-name optional">[removeAllListeners=false]</code>
                                     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                                     <span class="flag optional" title="This parameter is optional.">optional</span>
                                 
 
                                 <div class="param-description">
-                                    <p>If true, will not fire the events like &#39;channels/channelName&#39;</p>
-
-                                </div>
-
-                                
-                            </li>
-                            
-                            <li class="param">
-                                
-                                    <code class="param-name optional">[disableChannelsEmitter=false]</code>
-                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                                    <span class="flag optional" title="This parameter is optional.">optional</span>
-                                
-
-                                <div class="param-description">
-                                    <p>If true, will not fire the event &#39;channels&#39;</p>
+                                    <p>If true removes all the listeners set on the stream</p>
 
                                 </div>
 
@@ -458,7 +638,7 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">Undefined</span>:
+                        <span class="type"><a href="../classes/StreamChannels.html" class="crosslink">StreamChannels</a></span>:
                     
                 
             </div>

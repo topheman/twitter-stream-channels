@@ -9,42 +9,46 @@ var StreamChannels = require('./lib/StreamChannels');
  * Manage filters on multiple channels on the same Twitter Stream
  * ```js
 var TwitterStreamChannels = require('twitter-stream-channels');
-var credentials = require('my.twitter.credentials.json');
+var credentials = require('your.twitter.credentials.json');
 
 var client = new TwitterStreamChannels(credentials);
 
 var channels = {
-    "languages" : ['javascript','php','java','python','perl'],
-    "js-frameworks" : ['angularjs','jquery','backbone','emberjs'],
-    "web" : ['javascript','nodejs','html5','css','angularjs']
+  "languages" : ['javascript','php','java','python','perl'],
+  "js-frameworks" : ['angularjs','jquery','backbone','emberjs'],
+  "web" : ['javascript','nodejs','html5','css','angularjs']
 };
 
 var stream = client.streamChannels(channels);
 
 stream.on('channels/languages',function(tweet){
-    console.log(tweet);//any tweet with 'javascript','php','java','python','perl'
+  console.log(tweet);//any tweet with 'javascript','php','java','python','perl'
 });
 
 stream.on('channels/js-frameworks',function(tweet){
-    console.log(tweet);//any tweet with 'angularjs','jquery','backbone','emberjs'
+  console.log(tweet);//any tweet with 'angularjs','jquery','backbone','emberjs'
 });
 
 stream.on('channels/web',function(tweet){
-    console.log(tweet);//any tweet with 'javascript','nodejs','html5','css','angularjs'
+  console.log(tweet);//any tweet with 'javascript','nodejs','html5','css','angularjs'
 });
 
 stream.on('channels',function(tweet){
-    console.log(tweet);//any tweet with any of the keywords above
+  console.log(tweet);//any tweet with any of the keywords above
 });
 
 //whatever needs to close stream some time
 setTimeout(function(){
-    stream.close();//closes the stream connected to Twitter 
+  stream.stop();//closes the stream connected to Twitter 
 },100000);
 ```
  * @class TwitterStreamChannels
  * @constructor
- * @param {type} credentials
+ * @param {Object} credentials
+ * @param {String} credentials.consumer_key
+ * @param {String} credentials.consumer_secret
+ * @param {String} credentials.access_token
+ * @param {String} credentials.access_token_secret
  * @returns {TwitterStreamChannels}
  */
 var TwitterStreamChannels = function(credentials) {

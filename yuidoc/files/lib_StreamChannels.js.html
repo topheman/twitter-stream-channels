@@ -93,11 +93,14 @@
 /**
  * @module twitter-stream-channels
  */
+var EventEmitter = require(&#x27;events&#x27;).EventEmitter,
+    util = require(&#x27;util&#x27;);
 
 /**
  * @class StreamChannels
  * @constructor
  * @private
+ * @extends events.EventEmitter
  * @param {twit} apiClient
  * @param {Object} channels
  * @param {Object} [options]
@@ -106,21 +109,45 @@
  */
 var StreamChannels = function(apiClient, channels, options) {
   this.apiClient = apiClient;
+  EventEmitter.call(this);
+};
+
+util.inherits(StreamChannels, EventEmitter);
+
+/**
+ * Call this function to restart the stream after you called &#x60;.stop()&#x60; on it.
+ * 
+ * Note: there is no need to call &#x60;.start()&#x60; to begin streaming. &#x60; TwitterStreamChannels.stream&#x60; calls .start() for you.
+ * @method start
+ * @returns {StreamChannels}
+ */
+StreamChannels.prototype.start = function(){
+  
+  return this;
 };
 
 /**
  * Closes the opened stream with Twitter
  * @method stop
  * @param {Object} [options]
- * @param {Object} [options.disableChannelsSubEmitters=false] If true, will not fire the events like &#x27;channels/channelName&#x27;
- * @param {Object} [options.disableChannelsEmitter=false] If true, will not fire the event &#x27;channels&#x27;
- * @returns {undefined}
+ * @param {Object} [options.removeAllListeners=false] If true removes all the listeners set on the stream
+ * @returns {StreamChannels}
  */
 StreamChannels.prototype.stop = function(options){
   
+  return this;
 };
 
 module.exports = StreamChannels;
+
+/**
+ * Removes all the listeners added
+ * 
+ * See more methods http://nodejs.org/api/events.html#events_events
+ * @method removeAllListeners
+ * @param {String} event
+ * @returns {StreamChannels}
+ */
     </pre>
 </div>
 

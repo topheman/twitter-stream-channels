@@ -112,37 +112,37 @@
 <div class="box intro">
     <p>Manage filters on multiple channels on the same Twitter Stream</p>
 <pre class="code prettyprint"><code class="lang-js">var TwitterStreamChannels = require(&#39;twitter-stream-channels&#39;);
-var credentials = require(&#39;my.twitter.credentials.json&#39;);
+var credentials = require(&#39;your.twitter.credentials.json&#39;);
 
 var client = new TwitterStreamChannels(credentials);
 
 var channels = {
-   &quot;languages&quot; : [&#39;javascript&#39;,&#39;php&#39;,&#39;java&#39;,&#39;python&#39;,&#39;perl&#39;],
-   &quot;js-frameworks&quot; : [&#39;angularjs&#39;,&#39;jquery&#39;,&#39;backbone&#39;,&#39;emberjs&#39;],
-   &quot;web&quot; : [&#39;javascript&#39;,&#39;nodejs&#39;,&#39;html5&#39;,&#39;css&#39;,&#39;angularjs&#39;]
+ &quot;languages&quot; : [&#39;javascript&#39;,&#39;php&#39;,&#39;java&#39;,&#39;python&#39;,&#39;perl&#39;],
+ &quot;js-frameworks&quot; : [&#39;angularjs&#39;,&#39;jquery&#39;,&#39;backbone&#39;,&#39;emberjs&#39;],
+ &quot;web&quot; : [&#39;javascript&#39;,&#39;nodejs&#39;,&#39;html5&#39;,&#39;css&#39;,&#39;angularjs&#39;]
 };
 
 var stream = client.streamChannels(channels);
 
 stream.on(&#39;channels/languages&#39;,function(tweet){
-   console.log(tweet);//any tweet with &#39;javascript&#39;,&#39;php&#39;,&#39;java&#39;,&#39;python&#39;,&#39;perl&#39;
+ console.log(tweet);//any tweet with &#39;javascript&#39;,&#39;php&#39;,&#39;java&#39;,&#39;python&#39;,&#39;perl&#39;
 });
 
 stream.on(&#39;channels/js-frameworks&#39;,function(tweet){
-   console.log(tweet);//any tweet with &#39;angularjs&#39;,&#39;jquery&#39;,&#39;backbone&#39;,&#39;emberjs&#39;
+ console.log(tweet);//any tweet with &#39;angularjs&#39;,&#39;jquery&#39;,&#39;backbone&#39;,&#39;emberjs&#39;
 });
 
 stream.on(&#39;channels/web&#39;,function(tweet){
-   console.log(tweet);//any tweet with &#39;javascript&#39;,&#39;nodejs&#39;,&#39;html5&#39;,&#39;css&#39;,&#39;angularjs&#39;
+ console.log(tweet);//any tweet with &#39;javascript&#39;,&#39;nodejs&#39;,&#39;html5&#39;,&#39;css&#39;,&#39;angularjs&#39;
 });
 
 stream.on(&#39;channels&#39;,function(tweet){
-   console.log(tweet);//any tweet with any of the keywords above
+ console.log(tweet);//any tweet with any of the keywords above
 });
 
 //whatever needs to close stream some time
 setTimeout(function(){
-   stream.close();//closes the stream connected to Twitter 
+ stream.stop();//closes the stream connected to Twitter 
 },100000);</code></pre>
 
 </div>
@@ -219,7 +219,7 @@ setTimeout(function(){
                 <li class="param">
                     
                         <code class="param-name">credentials</code>
-                        <span class="type">Type</span>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
 
                     
@@ -228,6 +228,62 @@ setTimeout(function(){
                          
                     </div>
 
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">consumer_key</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
+
+                                <div class="param-description">
+                                    
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">consumer_secret</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
+
+                                <div class="param-description">
+                                    
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">access_token</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
+
+                                <div class="param-description">
+                                    
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">access_token_secret</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
+
+                                <div class="param-description">
+                                    
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
                     
                 </li>
             
@@ -343,7 +399,7 @@ setTimeout(function(){
             
         
         
-        <a href="../files/twitter-stream-channels.js.html#l54"><code>twitter-stream-channels.js:54</code></a>
+        <a href="../files/twitter-stream-channels.js.html#l58"><code>twitter-stream-channels.js:58</code></a>
         
         </p>
 
@@ -431,7 +487,7 @@ More here <a href="https://github.com/ttezel/twit">https://github.com/ttezel/twi
             
         
         
-        <a href="../files/twitter-stream-channels.js.html#l64"><code>twitter-stream-channels.js:64</code></a>
+        <a href="../files/twitter-stream-channels.js.html#l68"><code>twitter-stream-channels.js:68</code></a>
         
         </p>
 

@@ -101,42 +101,46 @@ var StreamChannels = require(&#x27;./lib/StreamChannels&#x27;);
  * Manage filters on multiple channels on the same Twitter Stream
  * &#x60;&#x60;&#x60;js
 var TwitterStreamChannels = require(&#x27;twitter-stream-channels&#x27;);
-var credentials = require(&#x27;my.twitter.credentials.json&#x27;);
+var credentials = require(&#x27;your.twitter.credentials.json&#x27;);
 
 var client = new TwitterStreamChannels(credentials);
 
 var channels = {
-    &quot;languages&quot; : [&#x27;javascript&#x27;,&#x27;php&#x27;,&#x27;java&#x27;,&#x27;python&#x27;,&#x27;perl&#x27;],
-    &quot;js-frameworks&quot; : [&#x27;angularjs&#x27;,&#x27;jquery&#x27;,&#x27;backbone&#x27;,&#x27;emberjs&#x27;],
-    &quot;web&quot; : [&#x27;javascript&#x27;,&#x27;nodejs&#x27;,&#x27;html5&#x27;,&#x27;css&#x27;,&#x27;angularjs&#x27;]
+  &quot;languages&quot; : [&#x27;javascript&#x27;,&#x27;php&#x27;,&#x27;java&#x27;,&#x27;python&#x27;,&#x27;perl&#x27;],
+  &quot;js-frameworks&quot; : [&#x27;angularjs&#x27;,&#x27;jquery&#x27;,&#x27;backbone&#x27;,&#x27;emberjs&#x27;],
+  &quot;web&quot; : [&#x27;javascript&#x27;,&#x27;nodejs&#x27;,&#x27;html5&#x27;,&#x27;css&#x27;,&#x27;angularjs&#x27;]
 };
 
 var stream = client.streamChannels(channels);
 
 stream.on(&#x27;channels/languages&#x27;,function(tweet){
-    console.log(tweet);//any tweet with &#x27;javascript&#x27;,&#x27;php&#x27;,&#x27;java&#x27;,&#x27;python&#x27;,&#x27;perl&#x27;
+  console.log(tweet);//any tweet with &#x27;javascript&#x27;,&#x27;php&#x27;,&#x27;java&#x27;,&#x27;python&#x27;,&#x27;perl&#x27;
 });
 
 stream.on(&#x27;channels/js-frameworks&#x27;,function(tweet){
-    console.log(tweet);//any tweet with &#x27;angularjs&#x27;,&#x27;jquery&#x27;,&#x27;backbone&#x27;,&#x27;emberjs&#x27;
+  console.log(tweet);//any tweet with &#x27;angularjs&#x27;,&#x27;jquery&#x27;,&#x27;backbone&#x27;,&#x27;emberjs&#x27;
 });
 
 stream.on(&#x27;channels/web&#x27;,function(tweet){
-    console.log(tweet);//any tweet with &#x27;javascript&#x27;,&#x27;nodejs&#x27;,&#x27;html5&#x27;,&#x27;css&#x27;,&#x27;angularjs&#x27;
+  console.log(tweet);//any tweet with &#x27;javascript&#x27;,&#x27;nodejs&#x27;,&#x27;html5&#x27;,&#x27;css&#x27;,&#x27;angularjs&#x27;
 });
 
 stream.on(&#x27;channels&#x27;,function(tweet){
-    console.log(tweet);//any tweet with any of the keywords above
+  console.log(tweet);//any tweet with any of the keywords above
 });
 
 //whatever needs to close stream some time
 setTimeout(function(){
-    stream.close();//closes the stream connected to Twitter 
+  stream.stop();//closes the stream connected to Twitter 
 },100000);
 &#x60;&#x60;&#x60;
  * @class TwitterStreamChannels
  * @constructor
- * @param {type} credentials
+ * @param {Object} credentials
+ * @param {String} credentials.consumer_key
+ * @param {String} credentials.consumer_secret
+ * @param {String} credentials.access_token
+ * @param {String} credentials.access_token_secret
  * @returns {TwitterStreamChannels}
  */
 var TwitterStreamChannels = function(credentials) {
