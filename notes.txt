@@ -1,0 +1,49 @@
+var TChannels = require('twitter-stream-channels');
+var credentials = require('my.twitter.credentials.json');
+
+var client = new TChannels(credentials);
+
+var channels = {
+    "languages" : ['javascript','php','java','python','perl'],
+    "js-frameworks" : ['angularjs','jquery','backbone','emberjs'],
+    "web" : ['javascript','nodejs','html5','css','angularjs']
+};
+
+var stream = client.streamChannels(channels);
+
+stream.on('channels/languages',function(tweet){
+    console.log(tweet);//any tweet with 'javascript','php','java','python','perl'
+});
+
+stream.on('channels/js-frameworks',function(tweet){
+    console.log(tweet);//any tweet with 'angularjs','jquery','backbone','emberjs'
+});
+
+stream.on('channels/web',function(tweet){
+    console.log(tweet);//any tweet with 'javascript','nodejs','html5','css','angularjs'
+});
+
+stream.on('channels',function(tweet){
+    console.log(tweet);//any tweet with any of the keywords above
+});
+
+//sugar methods
+setTimeout(function(){
+    //those methods will modify the events emitted like "channels/channelName", so will be needed to :
+    // - inspect useless listener (by the lib) to remove them
+    // - update the needed listener for the new channels added (by the user)
+    stream.addChannels(someChannels);
+    stream.removeChannels(arrayOfChannelNames);
+    stream.setChannels(someChannels);
+},30000);
+
+//also forward basic events like :
+- connected
+- disconnected
+- reconnect
+- tweet -> forward to channels (is that really that ? watch out for duplicates, normalization/denormalization)
+
+//whatever needs to close stream some time
+setTimeout(function(){
+    stream.close();//closes the stream connected to Twitter 
+},100000);
