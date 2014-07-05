@@ -1,0 +1,13 @@
+{
+  "name": "twitter-stream-channels",
+  "description": "Manage multiple channel search on the same Twitter Stream",
+  "url": "http://labs.topheman.com/",
+  "options": {
+    "linkNatives": "true",
+    "attributesEmit": "false",
+    "selleck": "false",
+    "paths": ["./"],
+    "exclude": "./node_modules,./nbproject,./test",
+    "outdir": "./yuidoc"
+  }
+}

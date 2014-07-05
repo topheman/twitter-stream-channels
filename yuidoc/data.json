@@ -1,0 +1,235 @@
+{
+    "project": {
+        "name": "twitter-stream-channels",
+        "description": "Manage multiple channel search on the same Twitter Stream",
+        "url": "http://labs.topheman.com/"
+    },
+    "files": {
+        "lib\\StreamChannels.js": {
+            "name": "lib\\StreamChannels.js",
+            "modules": {
+                "twitter-stream-channels": 1
+            },
+            "classes": {
+                "StreamChannels": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "twitter-stream-channels.js": {
+            "name": "twitter-stream-channels.js",
+            "modules": {},
+            "classes": {
+                "TwitterStreamChannels": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "twitter-stream-channels": {
+            "name": "twitter-stream-channels",
+            "submodules": {},
+            "classes": {
+                "StreamChannels": 1,
+                "TwitterStreamChannels": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "twitter-stream-channels.js",
+            "line": 8
+        }
+    },
+    "classes": {
+        "StreamChannels": {
+            "name": "StreamChannels",
+            "shortname": "StreamChannels",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "twitter-stream-channels",
+            "namespace": "",
+            "file": "lib\\StreamChannels.js",
+            "line": 5,
+            "is_constructor": 1,
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "apiClient",
+                    "description": "",
+                    "type": "Twit"
+                },
+                {
+                    "name": "channels",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Object",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "disableSubEmitters",
+                            "description": "If true, will disable the events like 'channels/channelName' (if you only want to rely on the global feed and $keywords and $channel this would be better for you)",
+                            "type": "Object",
+                            "optional": true,
+                            "optdefault": "false"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "StreamChannels"
+            }
+        },
+        "TwitterStreamChannels": {
+            "name": "TwitterStreamChannels",
+            "shortname": "TwitterStreamChannels",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "twitter-stream-channels",
+            "namespace": "",
+            "file": "twitter-stream-channels.js",
+            "line": 8,
+            "description": "Manage filters on multiple channels on the same Twitter Stream\n```js\nvar TwitterStreamChannels = require('twitter-stream-channels');\nvar credentials = require('my.twitter.credentials.json');\n\nvar client = new TwitterStreamChannels(credentials);\n\nvar channels = {\n   \"languages\" : ['javascript','php','java','python','perl'],\n   \"js-frameworks\" : ['angularjs','jquery','backbone','emberjs'],\n   \"web\" : ['javascript','nodejs','html5','css','angularjs']\n};\n\nvar stream = client.streamChannels(channels);\n\nstream.on('channels/languages',function(tweet){\n   console.log(tweet);//any tweet with 'javascript','php','java','python','perl'\n});\n\nstream.on('channels/js-frameworks',function(tweet){\n   console.log(tweet);//any tweet with 'angularjs','jquery','backbone','emberjs'\n});\n\nstream.on('channels/web',function(tweet){\n   console.log(tweet);//any tweet with 'javascript','nodejs','html5','css','angularjs'\n});\n\nstream.on('channels',function(tweet){\n   console.log(tweet);//any tweet with any of the keywords above\n});\n\n//whatever needs to close stream some time\nsetTimeout(function(){\n   stream.close();//closes the stream connected to Twitter \n},100000);\n```",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "credentials",
+                    "description": "",
+                    "type": "Type"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "TwitterStreamChannels"
+            }
+        }
+    },
+    "classitems": [
+        {
+            "file": "lib\\StreamChannels.js",
+            "line": 19,
+            "description": "Closes the opened stream with Twitter",
+            "itemtype": "method",
+            "name": "stop",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Object",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "disableChannelsSubEmitters",
+                            "description": "If true, will not fire the events like 'channels/channelName'",
+                            "type": "Object",
+                            "optional": true,
+                            "optdefault": "false"
+                        },
+                        {
+                            "name": "disableChannelsEmitter",
+                            "description": "If true, will not fire the event 'channels'",
+                            "type": "Object",
+                            "optional": true,
+                            "optdefault": "false"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Undefined"
+            },
+            "class": "StreamChannels",
+            "module": "twitter-stream-channels"
+        },
+        {
+            "file": "twitter-stream-channels.js",
+            "line": 54,
+            "description": "Returns a Twitter API client on which you can do pretty much what you want.\nMore here https://github.com/ttezel/twit",
+            "itemtype": "method",
+            "name": "getApiClient",
+            "return": {
+                "description": "",
+                "type": "Twit"
+            },
+            "class": "TwitterStreamChannels",
+            "module": "twitter-stream-channels"
+        },
+        {
+            "file": "twitter-stream-channels.js",
+            "line": 64,
+            "description": "Opens a Twitter Stream and returns you an other one on which you'll be able to attach events for each channels",
+            "itemtype": "method",
+            "name": "streamChannels",
+            "params": [
+                {
+                    "name": "channels",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Object",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "disableChannelsSubEmitters",
+                            "description": "If true, will not fire the events like 'channels/channelName'",
+                            "type": "Object",
+                            "optional": true,
+                            "optdefault": "false"
+                        },
+                        {
+                            "name": "disableChannelsEmitter",
+                            "description": "If true, will not fire the event 'channels'",
+                            "type": "Object",
+                            "optional": true,
+                            "optdefault": "false"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "StreamChannels"
+            },
+            "class": "TwitterStreamChannels",
+            "module": "twitter-stream-channels"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " lib\\StreamChannels.js:5"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " lib\\StreamChannels.js:19"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " twitter-stream-channels.js:8"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " twitter-stream-channels.js:54"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " twitter-stream-channels.js:64"
+        }
+    ]
+}

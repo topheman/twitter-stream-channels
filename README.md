@@ -8,10 +8,10 @@ This module lets you open multiple channels with there own filters, on the same 
 Example :
 
 ```js
-var TChannels = require('twitter-stream-channels');
+var TwitterStreamChannels = require('twitter-stream-channels');
 var credentials = require('my.twitter.credentials.json');
 
-var client = new TChannels(credentials);
+var client = new TwitterStreamChannels(credentials);
 
 var channels = {
     "languages" : ['javascript','php','java','python','perl'],
@@ -42,3 +42,5 @@ setTimeout(function(){
     stream.close();//closes the stream connected to Twitter 
 },100000);
 ```
+
+To generate doc : `npm run yuidoc`

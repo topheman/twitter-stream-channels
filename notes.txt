@@ -47,3 +47,59 @@ setTimeout(function(){
 setTimeout(function(){
     stream.close();//closes the stream connected to Twitter 
 },100000);
+
+----------
+
+client.streamChannels(channels);
+
+channels needs to be normalized to be passed to the track param
+but also need to be kept in memory when processing tweet.text to choose to which event to emit
+
+stream.on('channels/nameOfChannel')
+
+before adding the listener check if the channel exists
+
+add $keywords in tweets
+add $channel in tweets
+
+---------
+
+for full project (next)
+
+//finally, joining and leaving channels may be a bad idea, since if the user switch between tabs, he will loose a timelapsed infos, maybe better to
+//emit all channels from the server and listen on only one room from the client, passing for each tweet to which channel it belongs
+//so, the frontend service will manage and persist all data between views all along the visit (and keep updating infos even if the user isn't on the tab)
+//there will be some work on the frontend service on persistence + recovery from infos that wasn't processed (displayed) yet
+use socket.io channels http://socket.io/docs/rooms-and-namespaces/  -  http://stackoverflow.com/questions/16423150/socket-io-subscribe-to-multiple-channels
+
+stream.on('channels/languages',function(tweet){
+    io.sockets.in('languages').emit('message', { room: room, tweet: tweet });
+});
+
+//better as
+
+//for the emmit part from the server
+for(var channel in channels){
+    (function(channelName){
+        stream.on('channels/'+channelName,function(tweet){
+            io.sockets.in(channelName).emit(processTweet(tweet));//processTweet is here to remove all the none necessary parts of the tweet
+        });
+    })(channel);
+}
+
+//for the join part from the client
+socket.leave('javascript');//onchanging route
+socket.join('languages');//on landing on new controller
+
+//check the exact syntax according to socket io version (0.9.* or 1.*)
+
+---------
+
+better with no join or leave room + optimize to send only once all the channels (TODO)
+for(var channel in channels){
+    (function(channelName){
+        stream.on('channels/'+channelName,function(tweet){
+            io.sockets.emit({channel:channelName,tweet:processTweet(tweet)});//processTweet is here to remove all the none necessary parts of the tweet + each response has a tweet AND the channel from where it comes
+        });
+    })(channel);
+}

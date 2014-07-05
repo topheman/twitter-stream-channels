@@ -2,5 +2,8 @@
   "name": "twitter-stream-channels",
   "dependencies": {
     "twit": "^1.1.15"
+  },
+  "scripts": {
+    "yuidoc" : "yuidoc -c yuidoc.json"
   }
 }
