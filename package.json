@@ -1,10 +1,30 @@
 {
   "name": "twitter-stream-channels",
+  "version": "0.1.0",
+  "description": "Manage multiple filters on the same Twitter stream",
+  "keywords":[
+  	"twitter",
+  	"api",
+  	"stream",
+    "filter"
+  ],
+  "author": {
+  	"name": "Christophe Rosset"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/topheman/twitter-stream-channels.git"
+  },
+  "bugs": {
+    "url": "https://github.com/topheman/twitter-stream-channels/issues"
+  },
   "dependencies": {
     "twit": "^1.1.15"
   },
   "main": "./lib/TwitterStreamChannels",
   "scripts": {
     "yuidoc" : "yuidoc -c yuidoc.json"
-  }
+  },
+  "homepage": "http://labs.topheman.com/twitter-stream-channels/"
 }
