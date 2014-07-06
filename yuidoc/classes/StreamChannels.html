@@ -135,13 +135,7 @@
             
                 <li class="arg">
                     
-                        <code>channels</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code class="optional">[options]</code>
+                        <code>options</code>
                     
                 </li>
             
@@ -217,30 +211,15 @@
             
                 <li class="param">
                     
-                        <code class="param-name">channels</code>
+                        <code class="param-name">options</code>
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
 
                     
 
                     <div class="param-description">
-                         
-                    </div>
+                        <p>You can use the same filter options as described in the Twitter stream API for <code>statuses/filter</code> <a href="https://dev.twitter.com/docs/api/1.1/post/statuses/filter">https://dev.twitter.com/docs/api/1.1/post/statuses/filter</a></p>
 
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name optional">[options]</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
                     </div>
 
                     
@@ -248,13 +227,72 @@
                             
                             <li class="param">
                                 
-                                    <code class="param-name optional">[disableSubEmitters=false]</code>
+                                    <code class="param-name">track</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                                
+
+                                <div class="param-description">
+                                    <p>Pass an object describing your channels. If you don&#39;t want to use channels, you can pass directly an array of keywords.</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[follow]</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>A comma separated list of user IDs, indicating the users to return statuses for in the stream</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[locations]</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Specifies a set of bounding boxes to track. More about how to format this parameter here : <a href="https://dev.twitter.com/docs/streaming-apis/parameters#locations">https://dev.twitter.com/docs/streaming-apis/parameters#locations</a></p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[disableChannelsSubEmitters=false]</code>
                                     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                                     <span class="flag optional" title="This parameter is optional.">optional</span>
                                 
 
                                 <div class="param-description">
-                                    <p>If true, will disable the events like &#39;channels/channelName&#39; (if you only want to rely on the global feed and $keywords and $channel this would be better for you)</p>
+                                    <p>If true, will not fire the events like &#39;channels/channelName&#39;</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[disableChannelsEmitter=false]</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>If true, will not fire the event &#39;channels&#39;</p>
 
                                 </div>
 
@@ -394,7 +432,7 @@
             
         
         
-        <a href="../files/lib_StreamChannels.js.html#l51"><code>lib\StreamChannels.js:51</code></a>
+        <a href="../files/lib_StreamChannels.js.html#l54"><code>lib\StreamChannels.js:54</code></a>
         
         </p>
 
@@ -489,7 +527,7 @@
             
         
         
-        <a href="../files/lib_StreamChannels.js.html#l25"><code>lib\StreamChannels.js:25</code></a>
+        <a href="../files/lib_StreamChannels.js.html#l28"><code>lib\StreamChannels.js:28</code></a>
         
         </p>
 
@@ -571,7 +609,7 @@
             
         
         
-        <a href="../files/lib_StreamChannels.js.html#l37"><code>lib\StreamChannels.js:37</code></a>
+        <a href="../files/lib_StreamChannels.js.html#l40"><code>lib\StreamChannels.js:40</code></a>
         
         </p>
 

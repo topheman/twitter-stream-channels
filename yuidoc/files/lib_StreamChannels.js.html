@@ -102,12 +102,15 @@ var EventEmitter = require(&#x27;events&#x27;).EventEmitter,
  * @private
  * @extends events.EventEmitter
  * @param {twit} apiClient
- * @param {Object} channels
- * @param {Object} [options]
- * @param {Object} [options.disableSubEmitters=false] If true, will disable the events like &#x27;channels/channelName&#x27; (if you only want to rely on the global feed and $keywords and $channel this would be better for you)
+ * @param {Object} options You can use the same filter options as described in the Twitter stream API for &#x60;statuses/filter&#x60; https://dev.twitter.com/docs/api/1.1/post/statuses/filter
+ * @param {Object|Array} options.track Pass an object describing your channels. If you don&#x27;t want to use channels, you can pass directly an array of keywords.
+ * @param {String} [options.follow] A comma separated list of user IDs, indicating the users to return statuses for in the stream
+ * @param {String} [options.locations] Specifies a set of bounding boxes to track. More about how to format this parameter here : https://dev.twitter.com/docs/streaming-apis/parameters#locations
+ * @param {Object} [options.disableChannelsSubEmitters=false] If true, will not fire the events like &#x27;channels/channelName&#x27;
+ * @param {Object} [options.disableChannelsEmitter=false] If true, will not fire the event &#x27;channels&#x27;
  * @returns {StreamChannels}
  */
-var StreamChannels = function(apiClient, channels, options) {
+var StreamChannels = function(apiClient, options) {
   this.apiClient = apiClient;
   EventEmitter.call(this);
 };

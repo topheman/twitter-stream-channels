@@ -3,6 +3,7 @@
   "dependencies": {
     "twit": "^1.1.15"
   },
+  "main": "./lib/TwitterStreamChannels",
   "scripts": {
     "yuidoc" : "yuidoc -c yuidoc.json"
   }

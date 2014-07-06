@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>twitter-stream-channels.js - twitter-stream-channels</title>
+    <title>lib\TwitterStreamChannels.js - twitter-stream-channels</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -86,7 +86,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: twitter-stream-channels.js</h1>
+                        <h1 class="file-heading">File: lib\TwitterStreamChannels.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -95,43 +95,43 @@
  */
 
 var twit = require(&#x27;twit&#x27;);
-var StreamChannels = require(&#x27;./lib/StreamChannels&#x27;);
+var StreamChannels = require(&#x27;./StreamChannels&#x27;);
 
 /**
  * Manage filters on multiple channels on the same Twitter Stream
  * &#x60;&#x60;&#x60;js
 var TwitterStreamChannels = require(&#x27;twitter-stream-channels&#x27;);
-var credentials = require(&#x27;your.twitter.credentials.json&#x27;);
+var credentials = require(&#x27;my.twitter.credentials.json&#x27;);
 
 var client = new TwitterStreamChannels(credentials);
 
 var channels = {
-  &quot;languages&quot; : [&#x27;javascript&#x27;,&#x27;php&#x27;,&#x27;java&#x27;,&#x27;python&#x27;,&#x27;perl&#x27;],
-  &quot;js-frameworks&quot; : [&#x27;angularjs&#x27;,&#x27;jquery&#x27;,&#x27;backbone&#x27;,&#x27;emberjs&#x27;],
-  &quot;web&quot; : [&#x27;javascript&#x27;,&#x27;nodejs&#x27;,&#x27;html5&#x27;,&#x27;css&#x27;,&#x27;angularjs&#x27;]
+	&quot;languages&quot; : [&#x27;javascript&#x27;,&#x27;php&#x27;,&#x27;java&#x27;,&#x27;python&#x27;,&#x27;perl&#x27;],
+	&quot;js-frameworks&quot; : [&#x27;angularjs&#x27;,&#x27;jquery&#x27;,&#x27;backbone&#x27;,&#x27;emberjs&#x27;],
+	&quot;web&quot; : [&#x27;javascript&#x27;,&#x27;nodejs&#x27;,&#x27;html5&#x27;,&#x27;css&#x27;,&#x27;angularjs&#x27;]
 };
 
-var stream = client.streamChannels(channels);
+var stream = client.streamChannels({track:channels});
 
 stream.on(&#x27;channels/languages&#x27;,function(tweet){
-  console.log(tweet);//any tweet with &#x27;javascript&#x27;,&#x27;php&#x27;,&#x27;java&#x27;,&#x27;python&#x27;,&#x27;perl&#x27;
+    console.log(tweet);//any tweet with &#x27;javascript&#x27;,&#x27;php&#x27;,&#x27;java&#x27;,&#x27;python&#x27;,&#x27;perl&#x27;
 });
 
 stream.on(&#x27;channels/js-frameworks&#x27;,function(tweet){
-  console.log(tweet);//any tweet with &#x27;angularjs&#x27;,&#x27;jquery&#x27;,&#x27;backbone&#x27;,&#x27;emberjs&#x27;
+    console.log(tweet);//any tweet with &#x27;angularjs&#x27;,&#x27;jquery&#x27;,&#x27;backbone&#x27;,&#x27;emberjs&#x27;
 });
 
 stream.on(&#x27;channels/web&#x27;,function(tweet){
-  console.log(tweet);//any tweet with &#x27;javascript&#x27;,&#x27;nodejs&#x27;,&#x27;html5&#x27;,&#x27;css&#x27;,&#x27;angularjs&#x27;
+    console.log(tweet);//any tweet with &#x27;javascript&#x27;,&#x27;nodejs&#x27;,&#x27;html5&#x27;,&#x27;css&#x27;,&#x27;angularjs&#x27;
 });
 
 stream.on(&#x27;channels&#x27;,function(tweet){
-  console.log(tweet);//any tweet with any of the keywords above
+    console.log(tweet);//any tweet with any of the keywords above
 });
 
 //whatever needs to close stream some time
 setTimeout(function(){
-  stream.stop();//closes the stream connected to Twitter 
+    stream.close();//closes the stream connected to Twitter 
 },100000);
 &#x60;&#x60;&#x60;
  * @class TwitterStreamChannels
@@ -160,14 +160,16 @@ TwitterStreamChannels.prototype.getApiClient = function() {
 /**
  * Opens a Twitter Stream and returns you an other one on which you&#x27;ll be able to attach events for each channels
  * @method streamChannels
- * @param {Object} channels
- * @param {Object} [options]
+ * @param {Object} options You can use the same filter options as described in the Twitter stream API for &#x60;statuses/filter&#x60; https://dev.twitter.com/docs/api/1.1/post/statuses/filter
+ * @param {Object|Array} options.track Pass an object describing your channels. If you don&#x27;t want to use channels, you can pass directly an array of keywords.
+ * @param {String} [options.follow] A comma separated list of user IDs, indicating the users to return statuses for in the stream
+ * @param {String} [options.locations] Specifies a set of bounding boxes to track. More about how to format this parameter here : https://dev.twitter.com/docs/streaming-apis/parameters#locations
  * @param {Object} [options.disableChannelsSubEmitters=false] If true, will not fire the events like &#x27;channels/channelName&#x27;
  * @param {Object} [options.disableChannelsEmitter=false] If true, will not fire the event &#x27;channels&#x27;
  * @returns {StreamChannels}
  */
-TwitterStreamChannels.prototype.streamChannels = function(channels) {
-  return new StreamChannels(this.apiClient, channels);
+TwitterStreamChannels.prototype.streamChannels = function(options) {
+  return new StreamChannels(this.apiClient, options);
 };
 
 module.exports = TwitterStreamChannels;

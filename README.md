@@ -14,12 +14,12 @@ var credentials = require('my.twitter.credentials.json');
 var client = new TwitterStreamChannels(credentials);
 
 var channels = {
-    "languages" : ['javascript','php','java','python','perl'],
-    "js-frameworks" : ['angularjs','jquery','backbone','emberjs'],
-    "web" : ['javascript','nodejs','html5','css','angularjs']
+	"languages" : ['javascript','php','java','python','perl'],
+	"js-frameworks" : ['angularjs','jquery','backbone','emberjs'],
+	"web" : ['javascript','nodejs','html5','css','angularjs']
 };
 
-var stream = client.streamChannels(channels);
+var stream = client.streamChannels({track:channels});
 
 stream.on('channels/languages',function(tweet){
     console.log(tweet);//any tweet with 'javascript','php','java','python','perl'
