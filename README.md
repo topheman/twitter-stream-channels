@@ -5,7 +5,11 @@ With the Twitter stream API, you can only open one stream at a time. So, if you 
 
 This module lets you open multiple channels with there own filters, on the same stream. And then, you can add events to each of them individually, to listen to there results, like if you had open multiple streams.
 
-Example :
+##1) Installation
+
+Just run `npm install twitter-stream-channels`
+
+##2) Example :
 
 ```js
 var TwitterStreamChannels = require('twitter-stream-channels');
@@ -43,4 +47,19 @@ setTimeout(function(){
 },100000);
 ```
 
-To generate doc : `npm run yuidoc`
+##3) API
+
+##4) For contributors
+
+* Installation :
+	* Once you've git cloned this repo, just `npm install` to install the dependencies.
+	* If you don't have jasmine-node globally, run `sudo npm install jasmine-node@1.14.2 -g` (specified version - for the moment last version is buggy) to install the jasmine framework + test runner for node that will let you run the unit tests
+	* If you plan to generate doc, and don't have yuidoc gobally, run `npm install yuidoc -g`
+	* If you wan't yo execute the examples or online tests, copy `twitter.credentials.default.json` to `twitter.credentials.json`, set your own credentials (you can get some at [https://apps.twitter.com/app/new](https://apps.twitter.com/app/new) if you don't have some already)
+* How to run the tests : 
+	* offline tests (don't need AND won't create any connection to Twitter) - run them as many time as you want :
+		* single run : `npm run tests-offline`
+		* continuous : `npm run tests-offline-watch`
+	* online tests (need the connexion to Twitter to use the streming API) : make sure you set your credentials in the `twitter.credentials.json` file. Don't run them too many times (if you attempt too much connexion, your IP could be black listed from Twitter) :
+		* single run : `npm run tests-online`
+* How to generate the doc : `npm run yuidoc`

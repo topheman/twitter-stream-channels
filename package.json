@@ -24,7 +24,10 @@
   },
   "main": "./lib/TwitterStreamChannels",
   "scripts": {
-    "yuidoc" : "yuidoc -c yuidoc.json"
+    "yuidoc" : "yuidoc -c yuidoc.json",
+    "tests-offline" : "jasmine-node spec/offline --verbose",
+    "tests-offline-watch" : "jasmine-node spec/offline --autotest --watch .",
+    "tests-online" : "jasmine-node spec/online --verbose"
   },
   "homepage": "http://labs.topheman.com/twitter-stream-channels/"
 }
