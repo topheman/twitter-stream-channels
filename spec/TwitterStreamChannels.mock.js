@@ -29,16 +29,14 @@ TwitMock.prototype.stream = function(path, params){
 };
 
 var TwitterStreamChannelsMock = function(credentials){
-  this.apiCLient = new TwitMock(credentials);
-  
+  this.apiClient = new TwitMock(credentials);
 };
 
 /*
  * Mocks the streamChannels method of TwitterStreamChannels to return a StreamChannels object with the correct options
  */
 TwitterStreamChannelsMock.prototype.streamChannels = function(options){
-  var stream = new StreamChannels(this.apiClient, options);
-  return stream.start();
+  return new StreamChannels(this.apiClient, options);
 };
 
 module.exports = TwitterStreamChannelsMock;
