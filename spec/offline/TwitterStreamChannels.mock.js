@@ -14,20 +14,19 @@ var EventEmitter = require('events').EventEmitter,
 //those are the tweets that will be emitted
 var inputTweetsMocks = require('./tweets.mock.json');
 
-StreamChannels.prototype.start = function(){
-  return this;
-};
-
-StreamChannels.prototype.stop = function(){
-  return this;
-};
-
 /*
  * Mock for the twitter api client twit
  * No oAuth request will be made
  */
 var TwitMock = function(credentials){
   
+};
+
+/*
+ * Mocking .stream with an empty function so that no call will be made
+ */
+TwitMock.prototype.stream = function(path, params){
+  return new TwitStreamMock();
 };
 
 /*
@@ -57,19 +56,27 @@ var TwitStreamMock = function(){
       }
     }
   },2*timerMultiplier);
+  
+  //following method are directly attached (on the prototype, they would be erased by EventEmitter's prototype)
+  this.start = function(){
+    return this;
+  };
+  
+  this.stop = function(){
+    return this;
+  };
+  
 };
 
 util.inherits(TwitStreamMock, EventEmitter);
 
-/*
- * Mocking stream with an empty function so that no call will be made
- */
-TwitMock.prototype.stream = function(path, params){
-  return new TwitStreamMock();
-};
-
 var TwitterStreamChannelsMock = function(credentials){
   this.apiClient = new TwitMock(credentials);
+};
+
+//this client returned is limited
+TwitterStreamChannelsMock.prototype.getApiClient = function(){
+  return this.apiClient;
 };
 
 /*

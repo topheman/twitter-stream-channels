@@ -6,7 +6,8 @@ var TwitterStreamChannels = require('./TwitterStreamChannels.mock');
 var client = new TwitterStreamChannels({});
 var inputTweetsMocks = require('./tweets.mock.json');
 
-var stream = client.streamChannels({track: "whatever"});
+//var stream = client.streamChannels({track: "whatever is in the json mock file"});
+var stream = client.getApiClient().stream('statuses/filter',{track: "whatever is in the json mock file"});
 var count = 0;
 
 stream.on('connect',function(){
