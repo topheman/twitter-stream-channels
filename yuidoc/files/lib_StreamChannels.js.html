@@ -113,12 +113,64 @@ var EventEmitter = require(&#x27;events&#x27;).EventEmitter,
 var StreamChannels = function(apiClient, options) {
   helpers.checkStreamChannelsOptions(options);
   helpers.checkStreamChannelsOptions(options, this);
-  helpers.preprocessKeywords(options,this);
-  this.apiClient = apiClient;
+  helpers.preprocessKeywords(options, this);
+  this.currentStream = apiClient.stream(&#x27;statuses/filter&#x27;,this._getOptionsToPassToApiClient(options));
   EventEmitter.call(this);
+  addEvents(this.currentStream, this, options);
 };
 
 util.inherits(StreamChannels, EventEmitter);
+
+/**
+ * Adds the events (specifics and propagated from twitter API client), according to options
+ * @function addEvents
+ * @private
+ * @param {twit} twitterStream
+ * @param {StreamChannels} streamChannels
+ * @param {Object} [options]
+ * @param {Object} [options.disableChannelsSubEmitters=false] If true, will not fire the events like &#x27;channels/channelName&#x27;
+ * @param {Object} [options.disableChannelsEmitter=false] If true, will not fire the event &#x27;channels&#x27;
+ * @returns {streamChannels}
+ */
+var addEvents = function(twitterStream, streamChannels, options){
+  
+  return streamChannels;
+};
+
+/**
+ * Removes the events (specifics and propagated from twitter API client), according to options
+ * @function removeEvents
+ * @private
+ * @param {twit} twitterStream
+ * @param {StreamChannels} streamChannels
+ * @param {Object} [options]
+ * @param {Object} [options.removeAllListeners=false] If true removes all the listeners set on the stream
+ * @returns {streamChannels}
+ */
+var removeEvents = function(twitterStream, streamChannels, options){
+  
+  return streamChannels;  
+};
+
+/**
+ * Formats options passed with non-duplicate tracked keywords
+ * @method _getOptionsToPassToApiClient
+ * @private
+ * @param {Object} options
+ * @returns {Object}
+ */
+StreamChannels.prototype._getOptionsToPassToApiClient = function(options){
+  var result = {};
+  if(typeof options !== &#x27;undefined&#x27;){
+    for(var key in options){
+      if(key !== &#x27;track&#x27;){
+        result[key] = options[key];
+      }
+    }
+  }
+  result.track = this.trackedKeywords;
+  return result;
+};
 
 /**
  * Call this function to restart the stream after you called &#x60;.stop()&#x60; on it.
@@ -128,7 +180,7 @@ util.inherits(StreamChannels, EventEmitter);
  * @returns {StreamChannels}
  */
 StreamChannels.prototype.start = function() {
-
+  this.currentStream.start();
   return this;
 };
 
@@ -140,7 +192,10 @@ StreamChannels.prototype.start = function() {
  * @returns {StreamChannels}
  */
 StreamChannels.prototype.stop = function(options) {
-
+  options = typeof options === &#x27;undefined&#x27; ? {} : options;
+  options.removeAllListeners = typeof options.removeAllListeners === &#x27;undefined&#x27; ? false : options.removeAllListeners;
+  this.currentStream.stop();
+  removeEvents(this.currentStream, this, options);
   return this;
 };
 
@@ -151,6 +206,24 @@ StreamChannels.prototype.stop = function(options) {
  */
 StreamChannels.prototype.getChannels = function() {
   return this.channels;
+};
+
+/**
+ * Returns an array of the keywords you&#x27;re tracking (duplicates were removed)
+ * @method getTrackedKeywords
+ * @returns {Array}
+ */
+StreamChannels.prototype.getTrackedKeywords = function() {
+  return this.trackedKeywords;
+};
+
+/**
+ * Returns your channel description with keywords lowercased (to ease matching with non case sensitive)
+ * @method getChannelsLowerCased
+ * @returns {StreamChannels.channels}
+ */
+StreamChannels.prototype.getChannelsLowerCased = function() {
+  return this.channelsLowerCased;
 };
 
 /**
@@ -198,41 +271,59 @@ var helpers = {
    * @returns {StreamChannels}
    */
   preprocessKeywords: function(options, streamChannels) {
-    streamChannels.trackKeywords = [];
+    streamChannels.trackedKeywords = [];
     streamChannels.channels = {};
-    streamChannels.channelsWithLowerCasedKeywords = {};
-    
-    if(options.track instanceof Array || typeof options.track === &#x27;string&#x27;){
+    streamChannels.channelsLowerCased = {};
+
+    if (options.track instanceof Array || typeof options.track === &#x27;string&#x27;) {
       options.track = {
-        &quot;default&quot; : track
+        &quot;default&quot;: options.track
       };
     }
-    
-    for(var channel in options.track){
-      streamChannels.channels[channel] = keywordsToArray(options.track[channel],[]);
+
+    for (var channel in options.track) {
+      streamChannels.channels[channel] = keywordsToArray(options.track[channel], []);
+      streamChannels.channelsLowerCased[channel] = streamChannels.channels[channel].map(function(item){
+        return item.toLowerCase();
+      });
+      streamChannels.channels[channel].forEach(function(item){
+        if(streamChannels.trackedKeywords.indexOf(item) === -1){
+          streamChannels.trackedKeywords.push(item);
+        }
+      });
     }
-    
+
     /*
      * Prepares keywords to an array of keywords like &#x27;foo,bar&#x27; -&gt; [&#x27;foo&#x27;,&#x27;bar&#x27;] also [&#x27;foo,bar&#x27;,&#x27;toto&#x27;] -&gt; [&#x27;foo&#x27;,&#x27;bar&#x27;,&#x27;toto&#x27;] also &#x27;foo,bar,toto&#x27; -&gt; [&#x27;foo&#x27;,&#x27;bar&#x27;,&#x27;toto&#x27;]
      * @param {Array|String} keywords
      * @returns {Array}
      */
-    function keywordsToArray(keywords,result){
-      if(typeof keywords === &#x27;string&#x27;){
+    function keywordsToArray(keywords, result) {
+      if (typeof keywords === &#x27;string&#x27;) {
         result = result.concat(keywords.split(&#x27;,&#x27;));
       }
-      else if(keywords instanceof Array){
-        if(keywords.length &gt; 0){
-          for(var i=0; i&lt;keywords.length; i++){
-            result = keywordsToArray(keywords[i],result);
+      else if (keywords instanceof Array) {
+        if (keywords.length &gt; 0) {
+          for (var i = 0; i &lt; keywords.length; i++) {
+            result = keywordsToArray(keywords[i], result);
           }
         }
       }
       return result;
     }
-    
+
     return streamChannels;
   }
+};
+
+
+/*
+ * This class is private to the StreamChannels class, it&#x27;s not exposed
+ * @private
+ * @class StreamChannels.postProcessing
+ */
+var postProcessing = {
+  
 };
     </pre>
 </div>
