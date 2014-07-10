@@ -87,15 +87,22 @@
                             "optional": true
                         },
                         {
-                            "name": "disableChannelsSubEmitters",
-                            "description": "If true, will not fire the events like 'channels/channelName'",
+                            "name": "enableChannelsEvents",
+                            "description": "If true, will fire the events like 'channels/channelName'",
                             "type": "Object",
                             "optional": true,
-                            "optdefault": "false"
+                            "optdefault": "true"
                         },
                         {
-                            "name": "disableChannelsEmitter",
-                            "description": "If true, will not fire the event 'channels'",
+                            "name": "enableRootChannelsEvent",
+                            "description": "If true, will fire the event 'channels'",
+                            "type": "Object",
+                            "optional": true,
+                            "optdefault": "true"
+                        },
+                        {
+                            "name": "enableKeywordsEvents",
+                            "description": "If true, will fire the events 'keywords/keywordName' (disabled by default)",
                             "type": "Object",
                             "optional": true,
                             "optdefault": "false"
@@ -160,7 +167,7 @@
     "classitems": [
         {
             "file": "lib/StreamChannels.js",
-            "line": 32,
+            "line": 40,
             "description": "Adds the events (specifics and propagated from twitter API client), according to options",
             "itemtype": "method",
             "name": "addEvents",
@@ -184,15 +191,22 @@
                     "optional": true,
                     "props": [
                         {
-                            "name": "disableChannelsSubEmitters",
-                            "description": "If true, will not fire the events like 'channels/channelName'",
+                            "name": "enableChannelsEvents",
+                            "description": "If true, will fire the events like 'channels/channelName'",
                             "type": "Object",
                             "optional": true,
-                            "optdefault": "false"
+                            "optdefault": "true"
                         },
                         {
-                            "name": "disableChannelsEmitter",
-                            "description": "If true, will not fire the event 'channels'",
+                            "name": "enableRootChannelsEvent",
+                            "description": "If true, will fire the event 'channels'",
+                            "type": "Object",
+                            "optional": true,
+                            "optdefault": "true"
+                        },
+                        {
+                            "name": "enableKeywordsEvents",
+                            "description": "If true, will fire the events 'keywords/keywordName' (disabled by default)",
                             "type": "Object",
                             "optional": true,
                             "optdefault": "false"
@@ -209,7 +223,7 @@
         },
         {
             "file": "lib/StreamChannels.js",
-            "line": 48,
+            "line": 64,
             "description": "Removes the events (specifics and propagated from twitter API client), according to options",
             "itemtype": "method",
             "name": "removeEvents",
@@ -251,7 +265,7 @@
         },
         {
             "file": "lib/StreamChannels.js",
-            "line": 63,
+            "line": 79,
             "description": "Formats options passed with non-duplicate tracked keywords",
             "itemtype": "method",
             "name": "_getOptionsToPassToApiClient",
@@ -273,7 +287,7 @@
         },
         {
             "file": "lib/StreamChannels.js",
-            "line": 83,
+            "line": 99,
             "description": "Call this function to restart the stream after you called `.stop()` on it.\n\nNote: there is no need to call `.start()` to begin streaming. ` TwitterStreamChannels.stream` calls .start() for you.",
             "itemtype": "method",
             "name": "start",
@@ -286,7 +300,7 @@
         },
         {
             "file": "lib/StreamChannels.js",
-            "line": 95,
+            "line": 111,
             "description": "Closes the opened stream with Twitter",
             "itemtype": "method",
             "name": "stop",
@@ -316,7 +330,7 @@
         },
         {
             "file": "lib/StreamChannels.js",
-            "line": 110,
+            "line": 126,
             "description": "Returns your channel description",
             "itemtype": "method",
             "name": "getChannels",
@@ -329,7 +343,7 @@
         },
         {
             "file": "lib/StreamChannels.js",
-            "line": 119,
+            "line": 135,
             "description": "Returns an array of the keywords you're tracking (duplicates were removed)",
             "itemtype": "method",
             "name": "getTrackedKeywords",
@@ -342,7 +356,7 @@
         },
         {
             "file": "lib/StreamChannels.js",
-            "line": 128,
+            "line": 144,
             "description": "Returns your channel description with keywords lowercased (to ease matching with non case sensitive)",
             "itemtype": "method",
             "name": "getChannelsLowerCased",
@@ -355,7 +369,7 @@
         },
         {
             "file": "lib/StreamChannels.js",
-            "line": 137,
+            "line": 153,
             "description": "Removes all the listeners added\n\nSee more methods http://nodejs.org/api/events.html#events_events",
             "itemtype": "method",
             "name": "removeAllListeners",
@@ -416,15 +430,22 @@
                             "optional": true
                         },
                         {
-                            "name": "disableChannelsSubEmitters",
-                            "description": "If true, will not fire the events like 'channels/channelName'",
+                            "name": "enableChannelsEvents",
+                            "description": "If true, will fire the events like 'channels/channelName'",
                             "type": "Object",
                             "optional": true,
-                            "optdefault": "false"
+                            "optdefault": "true"
                         },
                         {
-                            "name": "disableChannelsEmitter",
-                            "description": "If true, will not fire the event 'channels'",
+                            "name": "enableRootChannelsEvent",
+                            "description": "If true, will fire the event 'channels'",
+                            "type": "Object",
+                            "optional": true,
+                            "optdefault": "true"
+                        },
+                        {
+                            "name": "enableKeywordsEvents",
+                            "description": "If true, will fire the events 'keywords/keywordName' (disabled by default)",
                             "type": "Object",
                             "optional": true,
                             "optdefault": "false"
@@ -447,47 +468,47 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " lib/StreamChannels.js:32"
+            "line": " lib/StreamChannels.js:40"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/StreamChannels.js:32"
+            "line": " lib/StreamChannels.js:40"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " lib/StreamChannels.js:48"
+            "line": " lib/StreamChannels.js:64"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/StreamChannels.js:48"
+            "line": " lib/StreamChannels.js:64"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/StreamChannels.js:63"
+            "line": " lib/StreamChannels.js:79"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/StreamChannels.js:83"
+            "line": " lib/StreamChannels.js:99"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/StreamChannels.js:95"
+            "line": " lib/StreamChannels.js:111"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/StreamChannels.js:110"
+            "line": " lib/StreamChannels.js:126"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/StreamChannels.js:119"
+            "line": " lib/StreamChannels.js:135"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/StreamChannels.js:128"
+            "line": " lib/StreamChannels.js:144"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib/StreamChannels.js:137"
+            "line": " lib/StreamChannels.js:153"
         },
         {
             "message": "replacing incorrect tag: returns with return",

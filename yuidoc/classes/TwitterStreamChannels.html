@@ -564,13 +564,13 @@ More here <a href="https://github.com/ttezel/twit">https://github.com/ttezel/twi
                             
                             <li class="param">
                                 
-                                    <code class="param-name optional">[disableChannelsSubEmitters=false]</code>
+                                    <code class="param-name optional">[enableChannelsEvents=true]</code>
                                     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                                     <span class="flag optional" title="This parameter is optional.">optional</span>
                                 
 
                                 <div class="param-description">
-                                    <p>If true, will not fire the events like &#39;channels/channelName&#39;</p>
+                                    <p>If true, will fire the events like &#39;channels/channelName&#39;</p>
 
                                 </div>
 
@@ -579,13 +579,28 @@ More here <a href="https://github.com/ttezel/twit">https://github.com/ttezel/twi
                             
                             <li class="param">
                                 
-                                    <code class="param-name optional">[disableChannelsEmitter=false]</code>
+                                    <code class="param-name optional">[enableRootChannelsEvent=true]</code>
                                     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                                     <span class="flag optional" title="This parameter is optional.">optional</span>
                                 
 
                                 <div class="param-description">
-                                    <p>If true, will not fire the event &#39;channels&#39;</p>
+                                    <p>If true, will fire the event &#39;channels&#39;</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[enableKeywordsEvents=false]</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>If true, will fire the events &#39;keywords/keywordName&#39; (disabled by default)</p>
 
                                 </div>
 
