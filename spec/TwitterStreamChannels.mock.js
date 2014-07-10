@@ -25,7 +25,11 @@ var TwitMock = function(credentials){
  * Mocking stream with an empty function so that no call will be made
  */
 TwitMock.prototype.stream = function(path, params){
-  
+  return {
+    on: function(){
+      
+    }
+  };
 };
 
 var TwitterStreamChannelsMock = function(credentials){
