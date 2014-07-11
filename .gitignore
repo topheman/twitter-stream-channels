@@ -1,3 +1,5 @@
 /nbproject
 /twitter.credentials.json
 /node_modules
+.codio
+.settings
