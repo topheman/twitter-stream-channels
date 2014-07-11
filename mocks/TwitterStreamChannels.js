@@ -11,22 +11,27 @@ var fs = require('fs');
 var EventEmitter = require('events').EventEmitter,
         util = require('util');
 
-//those are the tweets that will be emitted
-var inputTweetsMocks = require('./data/tweets.json');
-
 /*
  * Mock for the twitter api client twit
  * No oAuth request will be made
+ * @param {Object} [credentials] @optional (since it's a mock, no credentials needed
+ * @param {Array} [credentials.tweets] @optional (by default will load /mocks/data/tweets.json)
+ * @param {Boolean} [credentials.continuous] @optional if true will loop on the tweets mock array until you call stop (good to when developping such things as websockets without calling twitter)
  */
 var TwitMock = function(credentials){
-  
+  //this is internal to the mock to give option to the dev to change the tweet mocks
+  credentials = typeof credentials === 'undefined' ? {} : credentials;
+  credentials.tweets = typeof credentials.tweets === 'undefined' ? require('./data/tweets.json') : credentials.tweets;
+  credentials.continuous = typeof credentials.continuous === 'undefined' ? false : credentials.continuous;
+  this._tweetsMock = credentials.tweets;
+  this._continuous = credentials.continuous;
 };
 
 /*
  * Mocking .stream with an empty function so that no call will be made
  */
 TwitMock.prototype.stream = function(path, params){
-  return new TwitStreamMock();
+  return new TwitStreamMock({tweets:this._tweetsMock, continuous: this._continuous});
 };
 
 /*
@@ -36,7 +41,12 @@ TwitMock.prototype.stream = function(path, params){
  * - connected
  * - tweet : will read the inputTweetsMocks file and emit the tweet found inside
  */
-var TwitStreamMock = function(){
+var TwitStreamMock = function(options){
+  
+  options = typeof options === 'undefined' ? {} : options;
+  options.tweets = typeof options.tweets === 'undefined' ? require('./data/tweets.json') : options.tweets;
+  options.continuous = typeof options.continuous === 'undefined' ? false : options.continuous;
+  
   EventEmitter.call(this);
   var that = this;
   setTimeout(function(){
@@ -46,13 +56,13 @@ var TwitStreamMock = function(){
     that.emit('connected');
   },1*timerMultiplier);
   setTimeout(function(){
-    if(inputTweetsMocks.length > 0){
-      for(var i=0; i<inputTweetsMocks.length; i++){
+    if(options.tweets.length > 0){
+      for(var i=0; i<options.tweets.length; i++){
         (function(tweet,i){
           setTimeout(function(){
             that.emit('tweet',tweet);
           },i*timerMultiplier);
-        })(inputTweetsMocks[i],i);
+        })(options.tweets[i],i);
       }
     }
   },2*timerMultiplier);
