@@ -6,13 +6,13 @@
 //in unitTest, we pass a flag --config highSpeed true and then the events will be emitted only each 1ms
 var timerMultiplier = process.env.highSpeed ? 1 : 100;
 
-var StreamChannels = require('../../lib/StreamChannels');
+var StreamChannels = require('../lib/StreamChannels');
 var fs = require('fs');
 var EventEmitter = require('events').EventEmitter,
         util = require('util');
 
 //those are the tweets that will be emitted
-var inputTweetsMocks = require('./tweets.mock.json');
+var inputTweetsMocks = require('./data/tweets.json');
 
 /*
  * Mock for the twitter api client twit

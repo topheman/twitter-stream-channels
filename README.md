@@ -58,8 +58,8 @@ setTimeout(function(){
 	* If you wan't yo execute the examples or online tests, copy `twitter.credentials.default.json` to `twitter.credentials.json`, set your own credentials (you can get some at [https://apps.twitter.com/app/new](https://apps.twitter.com/app/new) if you don't have some already)
 * How to run the tests : 
 	* offline tests (don't need AND won't create any connection to Twitter) - run them as many time as you want :
-		* single run : `npm run tests-offline`
-		* continuous : `npm run tests-offline-watch`
+		* single run : `npm run tests`
+		* continuous : `npm run tests-watch`
 	* online tests (need the connexion to Twitter to use the streming API) : make sure you set your credentials in the `twitter.credentials.json` file. Don't run them too many times (if you attempt too much connexion, your IP could be black listed from Twitter) :
 		* single run : `npm run tests-online`
 * How to generate the doc : `npm run yuidoc`

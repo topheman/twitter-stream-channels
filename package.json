@@ -25,8 +25,8 @@
   "main": "./lib/TwitterStreamChannels",
   "scripts": {
     "yuidoc" : "yuidoc -c yuidoc.json",
-    "tests-offline" : "jasmine-node spec/offline --verbose --config highSpeed true",
-    "tests-offline-watch" : "jasmine-node spec/offline --autotest --config highSpeed true --watch .",
+    "tests" : "jasmine-node spec/offline --verbose --config highSpeed true",
+    "tests-watch" : "jasmine-node spec/offline --autotest --config highSpeed true --watch .",
     "tests-online" : "jasmine-node spec/online --verbose"
   },
   "homepage": "http://labs.topheman.com/twitter-stream-channels/"

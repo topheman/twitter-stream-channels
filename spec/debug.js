@@ -2,9 +2,9 @@
  * The purpose of this file is to check if the Mockups behave correctly
  */
 
-var TwitterStreamChannels = require('./TwitterStreamChannels.mock');
+var TwitterStreamChannels = require('../mocks/TwitterStreamChannels');
 var client = new TwitterStreamChannels({});
-var inputTweetsMocks = require('./tweets.mock.json');
+var inputTweetsMocks = require('../mocks/data/tweets.json');
 
 //var stream = client.streamChannels({track: "whatever is in the json mock file"});
 var stream = client.getApiClient().stream('statuses/filter',{track: "whatever is in the json mock file"});
@@ -28,4 +28,4 @@ setTimeout(function(){
   console.log('> stopped stream');
   console.log('> retrieved '+count+' tweets / '+inputTweetsMocks.length+' tweets were send by the mock');
   process.exit();
-},15000);
+},17000);

@@ -1,11 +1,12 @@
-//example of using streams, using directly the twit library (via getApiClient)
+//example of using streams, using directly the twit library (via getApiClient) - with the mock
+//this time stopping and restarting the stream
 
-var TwitterStreamChannels = require('../main');
-var credentials = require('../twitter.credentials.json');
+var TwitterStreamChannels = require('../../mocks/TwitterStreamChannels');
+var credentials = require('../../twitter.credentials.json');//not necessary - since using mock
 
 var client = new TwitterStreamChannels(credentials);
 
-var stream = client.getApiClient().stream('statuses/filter', {track: ['worldcup']});
+var stream = client.getApiClient().stream('statuses/filter', {track: ['any,word,in,the,mock,data']});
 
 stream.on('connect', function() {
   console.log('> attempting to connect to twitter');
