@@ -2,7 +2,7 @@
  * The purpose of this file is to check if the Mockups behave correctly
  */
 
-var TwitterStreamChannels = require('../mocks/TwitterStreamChannels');
+var TwitterStreamChannels = require('../../main').getMockedClass();
 var client = new TwitterStreamChannels({});
 var inputTweetsMocks = require('../mocks/data/tweets.json');
 

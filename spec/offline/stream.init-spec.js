@@ -3,7 +3,7 @@
  * (so you can run it as many times as you want)
  */
 
-var TwitterStreamChannels = require('../../mocks/TwitterStreamChannels');
+var TwitterStreamChannels = require('../../main').getMockedClass();
 var client = new TwitterStreamChannels({});
 
 describe('client.streamChannels(options) - init (offline)', function() {

@@ -56,6 +56,7 @@ setTimeout(function() {
 
   stream.on('disconnect', function() {
     console.log('>>> twitter emit : disconnect');
+    process.exit();
   });
 
   stream.on('tweet', function(tweet) {

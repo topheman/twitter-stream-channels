@@ -1,8 +1,9 @@
 //example of using streams, using directly the twit library (via getApiClient) - with the mock
 //this time stopping and restarting the stream
 
-var TwitterStreamChannels = require('../../mocks/TwitterStreamChannels');
+var TwitterStreamChannels = require('../../main').getMockedClass();
 var credentials = require('../../twitter.credentials.json');//not necessary - since using mock
+credentials.continuous = true;//to loop indefinitly on the mocked tweets
 
 var client = new TwitterStreamChannels(credentials);
 
@@ -21,7 +22,7 @@ stream.on('disconnect', function() {
 });
 
 stream.on('tweet', function(tweet) {
-  console.log(tweet.text);
+  console.log(tweet.$index,tweet.text);
 });
 
 stream.on('reconnect', function (request, response, connectInterval) {
@@ -56,10 +57,11 @@ setTimeout(function() {
 
   stream.on('disconnect', function() {
     console.log('>>> twitter emit : disconnect');
+    process.exit();
   });
 
   stream.on('tweet', function(tweet) {
-    console.log(tweet);
+    console.log(tweet.$index,tweet.text);
   });
 
   stream.on('reconnect', function (request, response, connectInterval) {
@@ -72,4 +74,4 @@ setTimeout(function() {
   stream.stop();
   console.log('>>> stopped stream');
   process.exit();
-}, 33000);
+}, 40000);

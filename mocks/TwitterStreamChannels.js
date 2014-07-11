@@ -31,7 +31,7 @@ var TwitMock = function(credentials){
  * Mocking .stream with an empty function so that no call will be made
  */
 TwitMock.prototype.stream = function(path, params){
-  return new TwitStreamMock({tweets:this._tweetsMock, continuous: this._continuous});
+  return (new TwitStreamMock({tweets:this._tweetsMock, continuous: this._continuous})).start();
 };
 
 /*
@@ -47,32 +47,69 @@ var TwitStreamMock = function(options){
   options.tweets = typeof options.tweets === 'undefined' ? require('./data/tweets.json') : options.tweets;
   options.continuous = typeof options.continuous === 'undefined' ? false : options.continuous;
   
+  this.currentTweetIndex = 0;
+
   EventEmitter.call(this);
-  var that = this;
-  setTimeout(function(){
-    that.emit('connect');
-  },0);
-  setTimeout(function(){
-    that.emit('connected');
-  },1*timerMultiplier);
-  setTimeout(function(){
-    if(options.tweets.length > 0){
-      for(var i=0; i<options.tweets.length; i++){
-        (function(tweet,i){
-          setTimeout(function(){
-            that.emit('tweet',tweet);
-          },i*timerMultiplier);
-        })(options.tweets[i],i);
-      }
-    }
-  },2*timerMultiplier);
   
   //following method are directly attached (on the prototype, they would be erased by EventEmitter's prototype)
   this.start = function(){
+    
+    //don't do anything if already connected
+    if(this.abortedBy === null){
+      return this;
+    }
+    
+    var that = this;
+    this.abortedBy = null;
+  
+    var emitTweetCb = function(){
+      var that = this;
+      setTimeout(function(){
+        //only send tweet if the stream hasn't been stopped
+        if(that.abortedBy === null){
+          //emit the tweet
+          if(options.tweets[that.currentTweetIndex]){
+            options.tweets[that.currentTweetIndex].$index = that.currentTweetIndex;
+            that.emit('tweet',options.tweets[that.currentTweetIndex]);
+            that.currentTweetIndex++;
+          }
+          //case we are at the end of the tweets
+          if(that.currentTweetIndex >= options.tweets.length){
+            //in continuous restart from 0
+            if(options.continuous === true){
+              that.currentTweetIndex = 0;
+            }
+            else{
+              that._twitterDisconnect();
+              return false;//dont recall the callback for the next tick
+            }
+          }
+          emitTweetCb.call(that);
+        }
+      },1*timerMultiplier);
+    };
+    
+    setTimeout(function(){
+      that.emit('connect');
+    },0);
+    setTimeout(function(){
+      that.emit('connected');
+    },1*timerMultiplier);
+    setTimeout(function(){
+      emitTweetCb.call(that);
+    },2*timerMultiplier);
+    
     return this;
   };
   
   this.stop = function(){
+    this.abortedBy = 'twit-client';
+    return this;
+  };
+  
+  this._twitterDisconnect = function(){
+    this.abortedBy = 'twitter';
+    this.emit('disconnect');
     return this;
   };
   
