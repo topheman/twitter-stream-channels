@@ -1,7 +1,7 @@
 //example of using streams, using directly the twit library (via getApiClient)
 
-var TwitterStreamChannels = require('../main');
-var credentials = require('../twitter.credentials.json');
+var TwitterStreamChannels = require('../../main');
+var credentials = require('../../twitter.credentials.json');
 
 var client = new TwitterStreamChannels(credentials);
 
