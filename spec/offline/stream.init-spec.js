@@ -118,16 +118,29 @@ describe('client.streamChannels(options) - init (offline)', function() {
       expect(stream.getChannels()).toEqual(channelsOuput);
     });
 
-    it('should have a lowercased version of the channels', function() {
-      var stream = client.streamChannels({track: channelsInput});
-      expect(stream.getChannelsLowerCased()).toBeDefined();
-      expect(stream.getChannelsLowerCased()).toEqual(channelsLowerCasedOuput);
-    });
-
     it('should not have duplicates in tracked keywords', function() {
       var stream = client.streamChannels({track: channelsInput});
       expect(stream.getTrackedKeywords()).toBeDefined();
       expect(stream.getTrackedKeywords()).toEqual(trackedKeywordsOutput);
+    });
+
+    it('should have a regexp version of the channels - working in lower case', function() {
+      var stream = client.streamChannels({track: channelsInput});
+      expect(stream.getChannelsLowerCasedRegExp()).toBeDefined();
+      expect(stream.getChannelsLowerCasedRegExp()['colors'] instanceof RegExp).toBe(true);
+      expect('this is blue and also white but not red'.match(stream.getChannelsLowerCasedRegExp()['colors'])).toEqual(['blue','white']);
+      expect('you may like lemon and orange, in juice ?'.match(stream.getChannelsLowerCasedRegExp()['fruits'])).toEqual(['lemon','orange']);
+      expect('Some would say that yoda is wiser than Luke'.match(stream.getChannelsLowerCasedRegExp()['starWarsCharacters'])).toEqual(['yoda','han']);
+    });
+    
+    it('should have a mapping between lower case and upper case keywords',function(){
+      var stream = client.streamChannels({track: channelsInput});
+      expect(stream.channelsKeywordMapping['colors']['blue']).toBe('blue');
+      expect(stream.channelsKeywordMapping['colors']['orange']).toBe('orange');
+      expect(stream.channelsKeywordMapping['fruits']['kiwi']).toBe('kiwi');
+      expect(stream.channelsKeywordMapping['fruits']['apple']).toBe('apple');
+      expect(stream.channelsKeywordMapping['starWarsCharacters']['luke']).toBe('Luke');
+      expect(stream.channelsKeywordMapping['starWarsCharacters']['leia']).toBe('Leia');
     });
 
   });
