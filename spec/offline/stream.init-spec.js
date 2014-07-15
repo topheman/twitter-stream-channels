@@ -79,7 +79,7 @@ describe('client.streamChannels(options) - init (offline)', function() {
       "fruits": ['kiwi', 'orange', 'apple', 'lemon', 'coconut'],
       "starWarsCharacters": ['Luke', 'Leia', 'Han', 'Yoda']
     };
-    var channelsLowerCasedOuput = {
+    var channelsKeywordsLowerCasedOuput = {
       "colors": arrayFiltersOutput,
       "fruits": ['kiwi', 'orange', 'apple', 'lemon', 'coconut'],
       "starWarsCharacters": ['luke', 'leia', 'han', 'yoda']
@@ -126,21 +126,11 @@ describe('client.streamChannels(options) - init (offline)', function() {
 
     it('should have a regexp version of the channels - working in lower case', function() {
       var stream = client.streamChannels({track: channelsInput});
-      expect(stream.getChannelsLowerCasedRegExp()).toBeDefined();
-      expect(stream.getChannelsLowerCasedRegExp()['colors'] instanceof RegExp).toBe(true);
-      expect('this is blue and also white but not red'.match(stream.getChannelsLowerCasedRegExp()['colors'])).toEqual(['blue','white']);
-      expect('you may like lemon and orange, in juice ?'.match(stream.getChannelsLowerCasedRegExp()['fruits'])).toEqual(['lemon','orange']);
-      expect('Some would say that yoda is wiser than Luke'.match(stream.getChannelsLowerCasedRegExp()['starWarsCharacters'])).toEqual(['yoda','han']);
-    });
-    
-    it('should have a mapping between lower case and upper case keywords',function(){
-      var stream = client.streamChannels({track: channelsInput});
-      expect(stream.channelsKeywordMapping['colors']['blue']).toBe('blue');
-      expect(stream.channelsKeywordMapping['colors']['orange']).toBe('orange');
-      expect(stream.channelsKeywordMapping['fruits']['kiwi']).toBe('kiwi');
-      expect(stream.channelsKeywordMapping['fruits']['apple']).toBe('apple');
-      expect(stream.channelsKeywordMapping['starWarsCharacters']['luke']).toBe('Luke');
-      expect(stream.channelsKeywordMapping['starWarsCharacters']['leia']).toBe('Leia');
+      expect(stream.getChannelsKeywordsLowerCasedRegExp()).toBeDefined();
+      expect(stream.getChannelsKeywordsLowerCasedRegExp()['colors'] instanceof RegExp).toBe(true);
+      expect('this is blue and also white but not red'.match(stream.getChannelsKeywordsLowerCasedRegExp()['colors'])).toEqual(['blue','white']);
+      expect('you may like lemon and orange, in juice ?'.match(stream.getChannelsKeywordsLowerCasedRegExp()['fruits'])).toEqual(['lemon','orange']);
+      expect('Some would say that yoda is wiser than Luke'.match(stream.getChannelsKeywordsLowerCasedRegExp()['starWarsCharacters'])).toEqual(['yoda','han']);
     });
 
   });

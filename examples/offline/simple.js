@@ -6,7 +6,13 @@ var tweetsMock = require('../../mocks/data/tweets.json');
 
 var client = new TwitterStreamChannels(credentials);
 
-var stream = client.streamChannels({track: ['any,word,in,the,mock,data']});
+var channelsInput = {
+  "colors": "blue,white,yellow,green,orange",
+  "fruits": ['kiwi', 'orange,apple', 'lemon', 'coconut'],
+  "starWarsCharacters": ['Luke', 'Leia,Han', 'Yoda']
+};
+
+var stream = client.streamChannels({track: channelsInput});
 
 var count = 0;
 
@@ -22,10 +28,20 @@ stream.on('disconnect', function() {
   console.log('> twitter emit : disconnect');
 });
 
-stream.on('tweet', function(tweet) {
-  console.log(tweet.text);
+//stream.on('tweet', function(tweet) {
+//  console.log('>',tweet.text);
+//  count++;
+//});
+
+stream.on('channels',function(tweet){
+  console.log(tweet.$channels,tweet.text);
   count++;
 });
+
+//stream.on('channels/fruits',function(tweet){
+//  console.log(tweet.$channels,tweet.text);
+//  count++;
+//});
 
 stream.on('reconnect', function (request, response, connectInterval) {
   console.log('> waiting to reconnect in '+connectInterval+'ms');
