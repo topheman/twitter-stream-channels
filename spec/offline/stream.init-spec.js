@@ -13,7 +13,8 @@ describe('client.streamChannels(options) - init (offline)', function() {
     it('should throw exceptions when passing no parameters in options', function() {
       var error = null;
       try {
-        client.streamChannels();
+        var stream = client.streamChannels();
+        stream.stop();
       }
       catch (e) {
         error = e.message;
@@ -26,7 +27,8 @@ describe('client.streamChannels(options) - init (offline)', function() {
     it('should throw exceptions when track parameter is missing', function() {
       var error = null;
       try {
-        client.streamChannels({});
+        var stream = client.streamChannels({});
+        stream.stop();
       }
       catch (e) {
         error = e.message;
@@ -39,7 +41,8 @@ describe('client.streamChannels(options) - init (offline)', function() {
     it('should throw exceptions when track parameter is not an object(or an array) or a string', function() {
       var error = null;
       try {
-        client.streamChannels({track: 12});
+        var stream = client.streamChannels({track: 12});
+        stream.stop();
       }
       catch (e) {
         error = e.message;
@@ -52,7 +55,8 @@ describe('client.streamChannels(options) - init (offline)', function() {
     it('should NOT throw exceptions when track parameter is a string', function() {
       var error = null;
       try {
-        client.streamChannels({track: "whatever"});
+        var stream = client.streamChannels({track: "whatever"});
+        stream.stop();
       }
       catch (e) {
         error = e.message;
@@ -102,30 +106,35 @@ describe('client.streamChannels(options) - init (offline)', function() {
 
     it('should take a direct string in track parameter', function() {
       var stream = client.streamChannels({track: stringFiltersInput});
+      stream.stop();
       expect(stream.getChannels().default).toBeDefined();
       expect(stream.getChannels().default).toEqual(arrayFiltersOutput);
     });
 
     it('should take a direct array in track parameter', function() {
       var stream = client.streamChannels({track: arrayFiltersInput});
+      stream.stop();
       expect(stream.getChannels().default).toBeDefined();
       expect(stream.getChannels().default).toEqual(arrayFiltersOutput);
     });
 
     it('should take a channels object in track parameter', function() {
       var stream = client.streamChannels({track: channelsInput});
+      stream.stop();
       expect(stream.getChannels()).toBeDefined();
       expect(stream.getChannels()).toEqual(channelsOuput);
     });
 
     it('should not have duplicates in tracked keywords', function() {
       var stream = client.streamChannels({track: channelsInput});
+      stream.stop();
       expect(stream.getTrackedKeywords()).toBeDefined();
       expect(stream.getTrackedKeywords()).toEqual(trackedKeywordsOutput);
     });
 
     it('should have a regexp version of the channels - working in lower case', function() {
       var stream = client.streamChannels({track: channelsInput});
+      stream.stop();
       expect(stream.getChannelsKeywordsLowerCasedRegExp()).toBeDefined();
       expect(stream.getChannelsKeywordsLowerCasedRegExp()['colors'] instanceof RegExp).toBe(true);
       expect('this is blue and also white but not red'.match(stream.getChannelsKeywordsLowerCasedRegExp()['colors'])).toEqual(['blue','white']);
