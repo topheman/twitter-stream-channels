@@ -113,7 +113,7 @@
                         },
                         {
                             "name": "maxNumber",
-                            "description": "maximum number of tweets that will be retrieved (default 200)",
+                            "description": "maximum number of tweets that will be retrieved (default 200 / max 500)",
                             "type": "String",
                             "optional": true,
                             "optdefault": "200"
@@ -560,7 +560,7 @@
                         },
                         {
                             "name": "maxNumber",
-                            "description": "maximum number of tweets that will be retrieved (default 200)",
+                            "description": "maximum number of tweets that will be retrieved (default 200 / max 500)",
                             "type": "String",
                             "optional": true,
                             "optdefault": "200"

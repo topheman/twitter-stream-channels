@@ -116,7 +116,7 @@ var fs = require(&#x27;fs&#x27;);
  * @param {Object} options
  * @param {Array} options.track array of keywords to track
  * @param {String} options.output filepath of the json file where to put the retrieved tweets
- * @param {String} [options.maxNumber=200] maximum number of tweets that will be retrieved (default 200)
+ * @param {String} [options.maxNumber=200] maximum number of tweets that will be retrieved (default 200 / max 500)
  * @param {String} [options.timeout=100000] maximum delay after the stream will close whatever number of tweets are captured (default 100 000ms)
  * @return {MockDataRetriever}
  */
@@ -133,8 +133,11 @@ var MockDataRetriever = function(credentials,options){
   if(options.output === &#x27;undefined&#x27;){
     throw new Error(&quot;options.output parameter is mandatory&quot;);
   }
-  if(typeof options.maxNumber === &#x27;undefined&#x27; || options.maxNumber &gt; 200){
+  if(typeof options.maxNumber === &#x27;undefined&#x27;){
     options.maxNumber = 200;
+  }
+  if(options.maxNumber &gt; 500){
+    options.maxNumber = 500;
   }
   if(typeof options.timeout === &#x27;undefined&#x27; || options.timeout &gt; 100000){
     options.timeout = 100000;
