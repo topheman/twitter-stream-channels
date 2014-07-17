@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib\TwitterStreamChannels.js - twitter-stream-channels</title>
+    <title>lib\MockDataRetriever.js - twitter-stream-channels</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -88,7 +88,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib\TwitterStreamChannels.js</h1>
+                        <h1 class="file-heading">File: lib\MockDataRetriever.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -97,66 +97,7 @@
  */
 
 var twit = require(&#x27;twit&#x27;);
-var StreamChannels = require(&#x27;./StreamChannels&#x27;);
-
-/**
- * Manage filters on multiple channels on the same Twitter Stream
- * &#x60;&#x60;&#x60;js
-var TwitterStreamChannels = require(&#x27;twitter-stream-channels&#x27;);
-var credentials = require(&#x27;my.twitter.credentials.json&#x27;);
-
-var client = new TwitterStreamChannels(credentials);
-
-var channels = {
-	&quot;languages&quot; : [&#x27;javascript&#x27;,&#x27;php&#x27;,&#x27;java&#x27;,&#x27;python&#x27;,&#x27;perl&#x27;],
-	&quot;js-frameworks&quot; : [&#x27;angularjs&#x27;,&#x27;jquery&#x27;,&#x27;backbone&#x27;,&#x27;emberjs&#x27;],
-	&quot;web&quot; : [&#x27;javascript&#x27;,&#x27;nodejs&#x27;,&#x27;html5&#x27;,&#x27;css&#x27;,&#x27;angularjs&#x27;]
-};
-
-var stream = client.streamChannels({track:channels});
-
-stream.on(&#x27;channels/languages&#x27;,function(tweet){
-    console.log(tweet);//any tweet with &#x27;javascript&#x27;,&#x27;php&#x27;,&#x27;java&#x27;,&#x27;python&#x27;,&#x27;perl&#x27;
-});
-
-stream.on(&#x27;channels/js-frameworks&#x27;,function(tweet){
-    console.log(tweet);//any tweet with &#x27;angularjs&#x27;,&#x27;jquery&#x27;,&#x27;backbone&#x27;,&#x27;emberjs&#x27;
-});
-
-stream.on(&#x27;channels/web&#x27;,function(tweet){
-    console.log(tweet);//any tweet with &#x27;javascript&#x27;,&#x27;nodejs&#x27;,&#x27;html5&#x27;,&#x27;css&#x27;,&#x27;angularjs&#x27;
-});
-
-stream.on(&#x27;channels&#x27;,function(tweet){
-    console.log(tweet);//any tweet with any of the keywords above
-});
-
-//whatever needs to close stream some time
-setTimeout(function(){
-    stream.close();//closes the stream connected to Twitter 
-},100000);
-&#x60;&#x60;&#x60;
- * @class TwitterStreamChannels
- * @constructor
- * @param {Object} credentials
- * @param {String} credentials.consumer_key
- * @param {String} credentials.consumer_secret
- * @param {String} credentials.access_token
- * @param {String} credentials.access_token_secret
- * @return {TwitterStreamChannels}
- */
-var TwitterStreamChannels = function(credentials) {
-  this.apiClient = new twit(credentials);
-};
-
-/**
- * Returns a mocked object of TwitterStreamChannels on which you will be able to play your scenarios offline with your own mocked tweets
- * @method getMockedClass
- * @return {TwitterStreamChannels}
- */
-TwitterStreamChannels.getMockedClass = function(){
-  return require(&#x27;../mocks/TwitterStreamChannels&#x27;);
-};
+var fs = require(&#x27;fs&#x27;);
 
 /**
  * This will allow you to create your own json data mocks
@@ -164,7 +105,9 @@ TwitterStreamChannels.getMockedClass = function(){
  * Keep in mind this class is not designed to retrieved lots of tweets on long duration.
  * 
  * It was only designed to ease the creation of your data mocks to use after with &#x60;TwitterStreamChannels.getMockedClass()&#x60;
- * @method launchMockDataRetriever
+ * @class MockDataRetriever
+ * @constructor
+ * @private
  * @param {Object} credentials
  * @param {String} credentials.consumer_key
  * @param {String} credentials.consumer_secret
@@ -177,37 +120,84 @@ TwitterStreamChannels.getMockedClass = function(){
  * @param {String} [options.timeout=100000] maximum delay after the stream will close whatever number of tweets are captured (default 100 000ms)
  * @return {MockDataRetriever}
  */
-TwitterStreamChannels.launchMockDataRetriever = function(credentials,options){
-  return new require(&#x27;./MockDataRetriever&#x27;)(credentials,options);
+var MockDataRetriever = function(credentials,options){
+  if(typeof options === &#x27;undefined&#x27;){
+    throw new Error(&quot;options parameter is mandatory&quot;);
+  }
+  if(typeof options.track === &#x27;undefined&#x27;){
+    throw new Error(&quot;options.track parameter is mandatory&quot;);
+  }
+  if(options.track instanceof Array !== true){
+    throw new Error(&quot;options.track parameter must be an array of keywords&quot;);
+  }
+  if(options.output === &#x27;undefined&#x27;){
+    throw new Error(&quot;options.output parameter is mandatory&quot;);
+  }
+  if(typeof options.maxNumber === &#x27;undefined&#x27; || options.maxNumber &gt; 200){
+    options.maxNumber = 200;
+  }
+  if(typeof options.timeout === &#x27;undefined&#x27; || options.timeout &gt; 100000){
+    options.timeout = 100000;
+  }
+  
+  var date = new Date();
+  
+  var client = new twit(credentials);
+  
+  var tweets = [];
+  
+  var stream = client.stream(&#x27;statuses/filter&#x27;, {track: options.track});
+  
+  var onEnd = function() {
+    stream.stop();
+    console.log(&#x27;&#x27;);
+    console.log(&#x27;&gt; stopped stream after &#x27;+( (new Date()).getTime() - date.getTime() )+&#x27;ms - &#x27;+tweets.length+&#x27; tweets retrieved&#x27;);
+    if(tweets.length &gt; 0){
+    tweets = JSON.stringify(tweets);
+      fs.writeFile(options.output,tweets,function(err,data){
+        console.log(&#x27;&gt; writing retrieved tweets into file : &#x27;+options.output);
+        if(err){
+          console.log(&#x27;&gt; ! an error occured while writing tweets to file&#x27;);
+        }
+        process.exit();
+      });
+    }
+    else{
+      console.log(&#x27;&gt; ! no tweets retrieved, not writing into file : &#x27;+options.output);
+      process.exit();
+    }
+  };
+  
+  stream.on(&#x27;connect&#x27;, function() {
+    console.log(&#x27;&gt; connecting to twitter&#x27;);
+  });
+  
+  stream.on(&#x27;connected&#x27;, function() {
+    console.log(&#x27;&gt; connected to twitter - will disconnect in &#x27;+options.timeout+&#x27;ms or when &#x27;+options.maxNumber+&#x27; tweets are retrieved&#x27;);
+  });
+
+  stream.on(&#x27;disconnect&#x27;, function() {
+    console.log(&#x27;&gt; disconnected from twitter - please retry&#x27;);
+  });
+  
+  stream.on(&#x27;tweet&#x27;, function(tweet) {
+    tweets.push(tweet);
+    process.stdout.clearLine();  // clear current text
+    process.stdout.cursorTo(0);  // move cursor to beginning of line
+    process.stdout.write(tweets.length+&#x27; tweets retrieved&#x27;);  // write text
+    if(tweets.length &gt;= options.maxNumber){
+      onEnd();
+    }
+  });
+
+  setTimeout(function() {
+    onEnd();
+  }, options.timeout);
+  
 };
 
-/**
- * Returns a Twitter API client on which you can do pretty much what you want.
- * More here https://github.com/ttezel/twit
- * @method getApiClient
- * @returns {twit}
- */
-TwitterStreamChannels.prototype.getApiClient = function() {
-  return this.apiClient;
-};
+module.exports = MockDataRetriever;
 
-/**
- * Opens a Twitter Stream and returns you an other one on which you&#x27;ll be able to attach events for each channels
- * @method streamChannels
- * @param {Object} options You can use the same filter options as described in the Twitter stream API for &#x60;statuses/filter&#x60; https://dev.twitter.com/docs/api/1.1/post/statuses/filter
- * @param {Object|Array} options.track Pass an object describing your channels. If you don&#x27;t want to use channels, you can pass directly an array of keywords.
- * @param {String} [options.follow] A comma separated list of user IDs, indicating the users to return statuses for in the stream
- * @param {String} [options.locations] Specifies a set of bounding boxes to track. More about how to format this parameter here : https://dev.twitter.com/docs/streaming-apis/parameters#locations
- * @param {Object} [options.enableChannelsEvents=true] If true, will fire the events like &#x27;channels/channelName&#x27;
- * @param {Object} [options.enableRootChannelsEvent=true] If true, will fire the event &#x27;channels&#x27;
- * @param {Object} [options.enableKeywordsEvents=false] If true, will fire the events &#x27;keywords/keywordName&#x27; (disabled by default)
- * @return {StreamChannels}
- */
-TwitterStreamChannels.prototype.streamChannels = function(options) {
-  return new StreamChannels(this.apiClient, options);
-};
-
-module.exports = TwitterStreamChannels;
     </pre>
 </div>
 

@@ -74,4 +74,4 @@ setTimeout(function() {
   stream.stop();
   console.log('>>> stopped stream');
   process.exit();
-}, 40000);
+}, 43000);

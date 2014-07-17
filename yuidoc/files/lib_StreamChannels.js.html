@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>lib/StreamChannels.js - twitter-stream-channels</title>
+    <title>lib\StreamChannels.js - twitter-stream-channels</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -40,6 +40,8 @@
 
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/MockDataRetriever.html">MockDataRetriever</a></li>
             
                 <li><a href="../classes/StreamChannels.html">StreamChannels</a></li>
             
@@ -86,7 +88,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/StreamChannels.js</h1>
+                        <h1 class="file-heading">File: lib\StreamChannels.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -112,26 +114,32 @@ var EventEmitter = require(&#x27;events&#x27;).EventEmitter,
  * @returns {StreamChannels}
  */
 var StreamChannels = function(apiClient, options) {
-  helpers.checkStreamChannelsOptions(options);
   helpers.checkStreamChannelsOptions(options, this);
+  options.enableChannelsEvents = typeof options.enableChannelsEvents === &#x27;undefined&#x27; ? true : options.enableChannelsEvents;
+  options.enableRootChannelsEvent = typeof options.enableRootChannelsEvent === &#x27;undefined&#x27; ? true : options.enableRootChannelsEvent;
+  options.enableKeywordsEvents = typeof options.enableKeywordsEvents === &#x27;undefined&#x27; ? false : options.enableKeywordsEvents;
   helpers.preprocessKeywords(options, this);
   this.currentStream = apiClient.stream(&#x27;statuses/filter&#x27;,this._getOptionsToPassToApiClient(options));
   EventEmitter.call(this);
-  addEvents(this.currentStream, this, options);
+  addEvents(this.currentStream, this);
+  this.options = options;
 };
 
 util.inherits(StreamChannels, EventEmitter);
 
 
 var defaultEventsToTransmit = [
+  &#x27;connect&#x27;,
   &#x27;connected&#x27;,
   &#x27;disconnect&#x27;,
-  &#x27;reconnect&#x27;
+  &#x27;reconnect&#x27;,
+  &#x27;warning&#x27;,
+  &#x27;tweet&#x27;//temporary
 ];
 
 /**
  * Adds the events (specifics and propagated from twitter API client), according to options
- * @function addEvents
+ * @function addGenericEvents
  * @private
  * @param {twit} twitterStream
  * @param {StreamChannels} streamChannels
@@ -141,7 +149,7 @@ var defaultEventsToTransmit = [
  * @param {Object} [options.enableKeywordsEvents=false] If true, will fire the events &#x27;keywords/keywordName&#x27; (disabled by default)
  * @returns {streamChannels}
  */
-var addEvents = function(twitterStream, streamChannels, options){
+var addEvents = function(twitterStream, streamChannels){
   //transmit events
   for(var i=0; i&lt;defaultEventsToTransmit.length; i++){
     (function(eventName){
@@ -150,6 +158,9 @@ var addEvents = function(twitterStream, streamChannels, options){
       });
     })(defaultEventsToTransmit[i]);
   }
+  twitterStream.on(&#x27;tweet&#x27;,function(msg){
+    helpers.onTweetEvent(msg, streamChannels);
+  });
   return streamChannels;
 };
 
@@ -234,12 +245,12 @@ StreamChannels.prototype.getTrackedKeywords = function() {
 };
 
 /**
- * Returns your channel description with keywords lowercased (to ease matching with non case sensitive)
- * @method getChannelsLowerCased
+ * Returns an object key/value - key:your channels - value:the full text search RegExp for the keywords of this channel
+ * @method getchannelsKeywordsLowerCasedRegExp
  * @returns {StreamChannels.channels}
  */
-StreamChannels.prototype.getChannelsLowerCased = function() {
-  return this.channelsLowerCased;
+StreamChannels.prototype.getChannelsKeywordsLowerCasedRegExp = function() {
+  return this.channelsKeywordsLowerCasedRegExp;
 };
 
 /**
@@ -289,7 +300,9 @@ var helpers = {
   preprocessKeywords: function(options, streamChannels) {
     streamChannels.trackedKeywords = [];
     streamChannels.channels = {};
-    streamChannels.channelsLowerCased = {};
+    streamChannels.channelsKeywordsLowerCased = {};
+    streamChannels.channelsKeywordsLowerCasedRegExpSafe = {};
+    streamChannels.channelsKeywordsLowerCasedRegExp = {};
 
     if (options.track instanceof Array || typeof options.track === &#x27;string&#x27;) {
       options.track = {
@@ -298,10 +311,14 @@ var helpers = {
     }
 
     for (var channel in options.track) {
-      streamChannels.channels[channel] = keywordsToArray(options.track[channel], []);
-      streamChannels.channelsLowerCased[channel] = streamChannels.channels[channel].map(function(item){
+      streamChannels.channels[channel] = keywordsToArray(options.track[channel], []);//process the options.track[channel] to make sure it will be an array of keywords
+      streamChannels.channelsKeywordsLowerCased[channel] = streamChannels.channels[channel].map(function(item){
         return item.toLowerCase();
       });
+      streamChannels.channelsKeywordsLowerCasedRegExpSafe[channel] = streamChannels.channelsKeywordsLowerCased[channel].map(function(item){
+        return regExpEscape(item);//escape the lower cased keywords so they will be regexp proof
+      });
+      streamChannels.channelsKeywordsLowerCasedRegExp[channel] = streamChannels.channelsKeywordsLowerCased[channel].length &gt; 0 ? new RegExp(streamChannels.channelsKeywordsLowerCasedRegExpSafe[channel].join(&#x27;|&#x27;),&#x27;g&#x27;) : null;//create the full text search regexp on lower cased keywords
       streamChannels.channels[channel].forEach(function(item){
         if(streamChannels.trackedKeywords.indexOf(item) === -1){
           streamChannels.trackedKeywords.push(item);
@@ -329,17 +346,103 @@ var helpers = {
     }
 
     return streamChannels;
+  },
+  /*
+   * Tags $channels with an array of lower cased keywords found in it
+   * @param {Object} tweet The tweet to postprocess
+   * @param {StreamChannels} streamChannels The StreamChannels object we&#x27;re on, to know which keywords and channels to process
+   * @returns {StreamChannels} tweetInfos Containing two arrays : channels and keywords found in the tweet
+   */ 
+  postprocessTweet: function(tweet,streamChannels){
+    tweet.$channels = {};
+    var i,j,k;
+    var lowerCasedSearch = [];
+    var keywordsFound = [], tmpKeywords;
+    
+    //prepare the lowerCased strings to full text search in the tweet object
+    lowerCasedSearch.push(tweet.text.toLowerCase());
+    if(tweet.entities &amp;&amp; tweet.entities.urls &amp;&amp; tweet.entities.urls.length &gt; 0){
+      for(i=0; i&lt;tweet.entities.urls.length; i++){
+        if(tweet.entities.urls[i].display_url){
+          lowerCasedSearch.push(tweet.entities.urls[i].display_url);
+        }
+        if(tweet.entities.urls[i].expanded_url){
+          lowerCasedSearch.push(tweet.entities.urls[i].expanded_url);
+        }
+      }
+    }
+    
+    //find the keywords
+    for(var channel in streamChannels.channelsKeywordsLowerCasedRegExp){
+      keywordsFound = [];
+      for(j=0; j&lt;lowerCasedSearch.length; j++){
+        tmpKeywords = lowerCasedSearch[j].match(streamChannels.channelsKeywordsLowerCasedRegExp[channel]);
+        if(tmpKeywords !== null){
+          keywordsFound = keywordsFound.concat(tmpKeywords);
+        }
+      }
+      if(keywordsFound.length &gt; 0){
+        tweet.$channels[channel] = [];
+        for(k=0; k&lt;keywordsFound.length; k++){
+          if(tweet.$channels[channel].indexOf(keywordsFound[k]) === -1){
+            tweet.$channels[channel].push(keywordsFound[k]);
+          }
+        }
+      }
+    }
+    return streamChannels;
+  },
+  /*
+   * Emits the tweet on the right events (according to the options passed by the user)
+   * @param {Object} tweet postprocessed tweet
+   * @param {type} streamChannels The StreamChannels object we&#x27;re on, to emit from
+   * @returns {StreamChannels} returns the streamChannels object
+   */
+  emitPosprocessedTweet: function(tweet,streamChannels){
+    var channel, keyword;
+    if(streamChannels.options.enableRootChannelsEvent === true){
+      streamChannels.emit(&#x27;channels&#x27;, tweet);
+    }
+    if(streamChannels.options.enableChannelsEvents === true){
+      for(channel in tweet.$channels){
+        streamChannels.emit(&#x27;channels/&#x27;+channel, tweet);
+      }
+    }
+    if(streamChannels.options.enableKeywordsEvents === true){
+      for(channel in tweet.$channels){
+        if(tweet.$channels.length &gt; 0){
+          for(var i=0; i&lt;tweet.$channels.length; i++){
+            streamChannels.emit(&#x27;keywords/&#x27;+tweet.$channels[channel][i], tweet);
+          }
+        }
+      }
+    }
+    return streamChannels;
+  },
+  /*
+   * To execute when a tweet is received :
+   * - to posprocess the tweet
+   * - then emit the postprocessed tweet on the proper events
+   * @param {Object} tweet
+   * @param {StreamChannels} streamChannels
+   * @returns {StreamChannels}
+   */
+  onTweetEvent: function(tweet, streamChannels){
+    helpers.postprocessTweet(tweet, streamChannels);
+    return helpers.emitPosprocessedTweet(tweet, streamChannels);
   }
 };
 
-
-/*
- * This class is private to the StreamChannels class, it&#x27;s not exposed
- * @private
- * @class StreamChannels.postProcessing
+/**
+ * From http://docs.closure-library.googlecode.com/git/local_closure_goog_string_string.js.source.html#line1015
+ * Escapes characters in the string that are not safe to use in a RegExp.
+ * @param {*} s The string to escape. If not a string, it will be casted
+ *     to one.
+ * @return {string} A RegExp safe, escaped copy of {@code s}.
  */
-var postProcessing = {
-  
+var regExpEscape = function(s) {
+  return String(s).replace(/([-()\[\]{}+?*.$\^|,:#&lt;!\\])/g, &#x27;\\$1&#x27;).
+      replace(/\x08/g, &#x27;\\x08&#x27;);
 };
     </pre>
 </div>

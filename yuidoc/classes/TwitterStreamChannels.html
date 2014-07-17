@@ -41,6 +41,8 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
+                <li><a href="../classes/MockDataRetriever.html">MockDataRetriever</a></li>
+            
                 <li><a href="../classes/StreamChannels.html">StreamChannels</a></li>
             
                 <li><a href="../classes/TwitterStreamChannels.html">TwitterStreamChannels</a></li>
@@ -94,7 +96,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/lib_TwitterStreamChannels.js.html#l8"><code>lib&#x2F;TwitterStreamChannels.js:8</code></a>
+            Defined in: <a href="../files/lib_TwitterStreamChannels.js.html#l8"><code>lib\TwitterStreamChannels.js:8</code></a>
         </div>
     
 
@@ -196,7 +198,7 @@ setTimeout(function(){
             
         
         
-        <a href="../files/lib_TwitterStreamChannels.js.html#l8"><code>lib&#x2F;TwitterStreamChannels.js:8</code></a>
+        <a href="../files/lib_TwitterStreamChannels.js.html#l8"><code>lib\TwitterStreamChannels.js:8</code></a>
         
         </p>
 
@@ -341,6 +343,20 @@ setTimeout(function(){
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_getMockedClass">getMockedClass</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_launchMockDataRetriever">launchMockDataRetriever</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_streamChannels">streamChannels</a>
 
                                 
@@ -399,7 +415,7 @@ setTimeout(function(){
             
         
         
-        <a href="../files/lib_TwitterStreamChannels.js.html#l58"><code>lib&#x2F;TwitterStreamChannels.js:58</code></a>
+        <a href="../files/lib_TwitterStreamChannels.js.html#l90"><code>lib\TwitterStreamChannels.js:90</code></a>
         
         </p>
 
@@ -425,6 +441,322 @@ More here <a href="https://github.com/ttezel/twit">https://github.com/ttezel/twi
                 
                     
                         <span class="type">Twit</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getMockedClass" class="method item">
+    <h3 class="name"><code>getMockedClass</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/TwitterStreamChannels.html" class="crosslink">TwitterStreamChannels</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_TwitterStreamChannels.js.html#l58"><code>lib\TwitterStreamChannels.js:58</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns a mocked object of TwitterStreamChannels on which you will be able to play your scenarios offline with your own mocked tweets</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/TwitterStreamChannels.html" class="crosslink">TwitterStreamChannels</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_launchMockDataRetriever" class="method item">
+    <h3 class="name"><code>launchMockDataRetriever</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>credentials</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/MockDataRetriever.html" class="crosslink">MockDataRetriever</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_TwitterStreamChannels.js.html#l67"><code>lib\TwitterStreamChannels.js:67</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>This will allow you to create your own json data mocks</p>
+<p>Keep in mind this class is not designed to retrieved lots of tweets on long duration.</p>
+<p>It was only designed to ease the creation of your data mocks to use after with <code>TwitterStreamChannels.getMockedClass()</code></p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">credentials</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">consumer_key</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
+
+                                <div class="param-description">
+                                    
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">consumer_secret</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
+
+                                <div class="param-description">
+                                    
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">access_token</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
+
+                                <div class="param-description">
+                                    
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">access_token_secret</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
+
+                                <div class="param-description">
+                                    
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">track</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                                
+
+                                <div class="param-description">
+                                    <p>array of keywords to track</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name">output</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                
+
+                                <div class="param-description">
+                                    <p>filepath of the json file where to put the retrieved tweets</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[maxNumber=200]</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>maximum number of tweets that will be retrieved (default 200)</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[timeout=100000]</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>maximum delay after the stream will close whatever number of tweets are captured (default 100 000ms)</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/MockDataRetriever.html" class="crosslink">MockDataRetriever</a></span>:
                     
                 
             </div>
@@ -481,7 +813,7 @@ More here <a href="https://github.com/ttezel/twit">https://github.com/ttezel/twi
             
         
         
-        <a href="../files/lib_TwitterStreamChannels.js.html#l68"><code>lib&#x2F;TwitterStreamChannels.js:68</code></a>
+        <a href="../files/lib_TwitterStreamChannels.js.html#l100"><code>lib\TwitterStreamChannels.js:100</code></a>
         
         </p>
 
