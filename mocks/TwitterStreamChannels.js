@@ -15,23 +15,23 @@ var EventEmitter = require('events').EventEmitter,
  * Mock for the twitter api client twit
  * No oAuth request will be made
  * @param {Object} [credentials] @optional (since it's a mock, no credentials needed
- * @param {Array} [credentials.tweets] @optional (by default will load /mocks/data/tweets.json)
- * @param {Boolean} [credentials.continuous] @optional if true will loop on the tweets mock array until you call stop (good to when developping such things as websockets without calling twitter)
+ * @param {Array} [credentials.tweets] @optional (by default will load `/mocks/data/tweets.json`)
+ * @param {Boolean} [credentials.singleRun=true] @optional if false will loop on the tweets mock array until you call stop (default true)
  */
 var TwitMock = function(credentials){
   //this is internal to the mock to give option to the dev to change the tweet mocks
   credentials = typeof credentials === 'undefined' ? {} : credentials;
   credentials.tweets = typeof credentials.tweets === 'undefined' ? require('./data/tweets.json') : credentials.tweets;
-  credentials.continuous = typeof credentials.continuous === 'undefined' ? false : credentials.continuous;
+  credentials.singleRun = typeof credentials.singleRun === 'undefined' ? true : credentials.singleRun;
   this._tweetsMock = credentials.tweets;
-  this._continuous = credentials.continuous;
+  this._singleRun = credentials.singleRun;
 };
 
 /*
  * Mocking .stream with an empty function so that no call will be made
  */
 TwitMock.prototype.stream = function(path, params){
-  return (new TwitStreamMock({tweets:this._tweetsMock, continuous: this._continuous})).start();
+  return (new TwitStreamMock({tweets:this._tweetsMock, singleRun: this._singleRun})).start();
 };
 
 /*
@@ -45,7 +45,7 @@ var TwitStreamMock = function(options){
   
   options = typeof options === 'undefined' ? {} : options;
   options.tweets = typeof options.tweets === 'undefined' ? require('./data/tweets.json') : options.tweets;
-  options.continuous = typeof options.continuous === 'undefined' ? false : options.continuous;
+  options.singleRun = typeof options.singleRun === 'undefined' ? true : options.singleRun;
   
   this.currentTweetIndex = 0;
 
@@ -75,8 +75,8 @@ var TwitStreamMock = function(options){
           }
           //case we are at the end of the tweets
           if(that.currentTweetIndex >= options.tweets.length){
-            //in continuous restart from 0
-            if(options.continuous === true){
+            //in singleRun restart from 0
+            if(options.singleRun === false){
               that.currentTweetIndex = 0;
             }
             else{

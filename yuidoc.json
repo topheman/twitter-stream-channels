@@ -8,6 +8,6 @@
     "selleck": "false",
     "paths": ["./lib"],
     "outdir": "./yuidoc",
-    "themedir" : "./extra/yuidoc-theme-blue"
+    "themedir" : "./extras/yuidoc-theme-blue"
   }
 }

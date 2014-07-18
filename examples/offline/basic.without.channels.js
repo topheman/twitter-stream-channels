@@ -3,7 +3,7 @@
 
 var TwitterStreamChannels = require('../../main').getMockedClass();
 var credentials = require('../../twitter.credentials.json');//not necessary - since using mock
-credentials.continuous = true;//to loop indefinitly on the mocked tweets
+credentials.singleRun = false;//to loop indefinitly on the mocked tweets
 
 var client = new TwitterStreamChannels(credentials);
 

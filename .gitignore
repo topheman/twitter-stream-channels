@@ -3,3 +3,4 @@
 /node_modules
 .codio
 .settings
+/extras/yuidoc-theme-blue/node_modules
