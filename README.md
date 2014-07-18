@@ -11,9 +11,19 @@ Just run `npm install twitter-stream-channels`
 
 ##2) Example :
 
+file `my.twitter.credentials.json`
+```js
+{
+	"consumer_key": "XXXXX",
+	"consumer_secret": "XXXXX",
+	"access_token": "XXXXXX",
+	"access_token_secret": "XXXXX"
+}
+```
+
 ```js
 var TwitterStreamChannels = require('twitter-stream-channels');
-var credentials = require('my.twitter.credentials.json');
+var credentials = require('./my.twitter.credentials.json');
 
 var client = new TwitterStreamChannels(credentials);
 
@@ -26,24 +36,24 @@ var channels = {
 var stream = client.streamChannels({track:channels});
 
 stream.on('channels/languages',function(tweet){
-    console.log(tweet);//any tweet with 'javascript','php','java','python','perl'
+    console.log('>languages',tweet.text);//any tweet with 'javascript','php','java','python','perl'
 });
 
 stream.on('channels/js-frameworks',function(tweet){
-    console.log(tweet);//any tweet with 'angularjs','jquery','backbone','emberjs'
+    console.log('>frameworks',tweet.text);//any tweet with 'angularjs','jquery','backbone','emberjs'
 });
 
 stream.on('channels/web',function(tweet){
-    console.log(tweet);//any tweet with 'javascript','nodejs','html5','css','angularjs'
+    console.log('>web',tweet.text);//any tweet with 'javascript','nodejs','html5','css','angularjs'
 });
 
-stream.on('channels',function(tweet){
-    console.log(tweet);//any tweet with any of the keywords above
-});
+//stream.on('channels',function(tweet){
+//    console.log(tweet.text);//any tweet with any of the keywords above
+//});
 
-//whatever needs to close stream some time
 setTimeout(function(){
-    stream.close();//closes the stream connected to Twitter 
+    stream.close();//closes the stream connected to Twitter
+	console.log('>stream closed after 100 seconds');
 },100000);
 ```
 
@@ -58,8 +68,12 @@ setTimeout(function(){
 	* If you wan't yo execute the examples or online tests, copy `twitter.credentials.default.json` to `twitter.credentials.json`, set your own credentials (you can get some at [https://apps.twitter.com/app/new](https://apps.twitter.com/app/new) if you don't have some already)
 * How to run the tests : 
 	* offline tests (don't need AND won't create any connection to Twitter) - run them as many time as you want :
-		* single run : `npm run tests`
-		* continuous : `npm run tests-watch`
+		* single run : `npm run test`
+		* continuous : `npm run test-watch`
 	* online tests (need the connexion to Twitter to use the streming API) : make sure you set your credentials in the `twitter.credentials.json` file. Don't run them too many times (if you attempt too much connexion, your IP could be black listed from Twitter) :
-		* single run : `npm run tests-online`
-* How to generate the doc : `npm run yuidoc`
+		* single run : `npm run test-online`
+* How to generate the doc :
+	* Once :
+		* Make sure you have yuidoc, if not `npm install yuidocjs -g`
+		* Install the theme dependencies : `cd extras/yuidoc-theme-blue` then `npm install`
+	* After that, at the root, just run `npm run yuidoc`
