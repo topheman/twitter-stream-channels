@@ -94,7 +94,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/lib_TwitterStreamChannels.js.html#l8"><code>lib\TwitterStreamChannels.js:8</code></a>
+            Defined in: <a href="../files/lib_TwitterStreamChannels.js.html#l12"><code>lib\TwitterStreamChannels.js:12</code></a>
         </div>
     
 
@@ -104,7 +104,9 @@
 
 <h3>Summary</h3>
 <div class="intro">
-    
+    <p>With the Twitter stream API, you can only open one stream at a time. So, if you have multiple filters, the tweets in result will be mixed up, you&#39;ll need to do some post-processing.</p>
+<p>This module lets you open multiple channels with there own filters, on the same stream. And then, you can add events to each of them individually, to listen to there results, like if you had open multiple streams.</p>
+
 </div>
 
 
@@ -149,6 +151,9 @@
         </div>
     </div>
 </div>
+<footer class="copyright">
+  ©2014 <a href="http://labs.topheman.com/">labs.topheman.com</a> - Christophe Rosset
+</footer>
 <script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script>prettyPrint();</script>
 <script src="../assets/js/yui-prettify.js"></script>

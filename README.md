@@ -5,11 +5,11 @@ With the Twitter stream API, you can only open one stream at a time. So, if you 
 
 This module lets you open multiple channels with there own filters, on the same stream. And then, you can add events to each of them individually, to listen to there results, like if you had open multiple streams.
 
-##1) Installation
+##Installation
 
 Just run `npm install twitter-stream-channels`
 
-##2) Example :
+##Example :
 
 file `my.twitter.credentials.json`
 ```js
@@ -64,7 +64,7 @@ setTimeout(function(){
 },100000);
 ```
 
-##3) API
+##API
 
 You can find an API doc generated from the source code on [http://labs.topheman.com/twitter-stream-channels/](http://labs.topheman.com/twitter-stream-channels/ "http://labs.topheman.com/twitter-stream-channels/").
 
@@ -95,7 +95,9 @@ var client = new TwitterStreamChannelsMocked({
 
 I use it for the unit tests of the module as well as when I code some application based on it.
 
-##4) For contributors
+##FAQ
+
+##For contributors
 
 * Installation :
 	* Once you've git cloned this repo, just `npm install` to install the dependencies.

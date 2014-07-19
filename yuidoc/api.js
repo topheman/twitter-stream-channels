@@ -11,7 +11,8 @@ YUI.add("yuidoc-meta", function(Y) {
     "allModules": [
         {
             "displayName": "twitter-stream-channels",
-            "name": "twitter-stream-channels"
+            "name": "twitter-stream-channels",
+            "description": "With the Twitter stream API, you can only open one stream at a time. So, if you have multiple filters, the tweets in result will be mixed up, you'll need to do some post-processing.\n\nThis module lets you open multiple channels with there own filters, on the same stream. And then, you can add events to each of them individually, to listen to there results, like if you had open multiple streams."
         }
     ]
 } };

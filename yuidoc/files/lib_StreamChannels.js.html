@@ -132,8 +132,7 @@ var defaultEventsToTransmit = [
   &#x27;connected&#x27;,
   &#x27;disconnect&#x27;,
   &#x27;reconnect&#x27;,
-  &#x27;warning&#x27;,
-  &#x27;tweet&#x27;//temporary
+  &#x27;warning&#x27;
 ];
 
 /**
@@ -174,7 +173,10 @@ var addEvents = function(twitterStream, streamChannels){
  * @returns {streamChannels}
  */
 var removeEvents = function(twitterStream, streamChannels, options){
-  
+  if(options.removeAllListeners === true){
+    twitterStream.removeAllListeners();
+    streamChannels.removeAllListeners();
+  }
   return streamChannels;  
 };
 
@@ -187,9 +189,10 @@ var removeEvents = function(twitterStream, streamChannels, options){
  */
 StreamChannels.prototype._getOptionsToPassToApiClient = function(options){
   var result = {};
+  var dontHandle = [&#x27;track&#x27;,&#x27;enableChannelsEvents&#x27;,&#x27;enableRootChannelsEvent&#x27;,&#x27;enableKeywordsEvents&#x27;];
   if(typeof options !== &#x27;undefined&#x27;){
     for(var key in options){
-      if(key !== &#x27;track&#x27;){
+      if(dontHandle.indexOf(key) === -1){
         result[key] = options[key];
       }
     }
@@ -409,8 +412,8 @@ var helpers = {
     }
     if(streamChannels.options.enableKeywordsEvents === true){
       for(channel in tweet.$channels){
-        if(tweet.$channels.length &gt; 0){
-          for(var i=0; i&lt;tweet.$channels.length; i++){
+        if(tweet.$channels[channel].length &gt; 0){
+          for(var i=0; i&lt;tweet.$channels[channel].length; i++){
             streamChannels.emit(&#x27;keywords/&#x27;+tweet.$channels[channel][i], tweet);
           }
         }
@@ -452,6 +455,9 @@ var regExpEscape = function(s) {
         </div>
     </div>
 </div>
+<footer class="copyright">
+  ©2014 <a href="http://labs.topheman.com/">labs.topheman.com</a> - Christophe Rosset
+</footer>
 <script src="../assets/vendor/prettify/prettify-min.js"></script>
 <script>prettyPrint();</script>
 <script src="../assets/js/yui-prettify.js"></script>
