@@ -3,13 +3,23 @@
  * To test only the init of the StreamChannels object (before any call to twitter)
  */
 
-//in unitTest, we pass a flag --config highSpeed true and then the events will be emitted only each 1ms
-var timerMultiplier = process.env.highSpeed ? 1 : 100;
+//in unitTest, we pass a flag --config highSpeed true and then the events will be emitted really faster (not using setTimeout but process.nextTick)
+var highSpeed = process.env.highSpeed ? true : false;
 
 var StreamChannels = require('../lib/StreamChannels');
 var fs = require('fs');
 var EventEmitter = require('events').EventEmitter,
         util = require('util');
+
+//optimization for the unit-tests
+var nextLoop = (function(){
+  if(highSpeed === true){
+    return process.nextTick;
+  }
+  else{
+    return setTimeout;
+  }
+})();
 
 /*
  * Mock for the twitter api client twit
@@ -17,21 +27,28 @@ var EventEmitter = require('events').EventEmitter,
  * @param {Object} [credentials] @optional (since it's a mock, no credentials needed
  * @param {Array} [credentials.tweets] @optional (by default will load `/mocks/data/tweets.json`)
  * @param {Boolean} [credentials.singleRun=true] @optional if false will loop on the tweets mock array until you call stop (default true)
+ * @param {Number} [credentials.timeSpeed=100] @optional delay between each tweets emitted in ms (default 100ms)
  */
 var TwitMock = function(credentials){
   //this is internal to the mock to give option to the dev to change the tweet mocks
   credentials = typeof credentials === 'undefined' ? {} : credentials;
   credentials.tweets = typeof credentials.tweets === 'undefined' ? require('./data/tweets.json') : credentials.tweets;
   credentials.singleRun = typeof credentials.singleRun === 'undefined' ? true : credentials.singleRun;
+  credentials.timeSpeed = typeof credentials.timeSpeed === 'undefined' ? 100 : credentials.timeSpeed;
   this._tweetsMock = credentials.tweets;
   this._singleRun = credentials.singleRun;
+  this._timeSpeed = credentials.timeSpeed;
 };
 
 /*
  * Mocking .stream with an empty function so that no call will be made
  */
 TwitMock.prototype.stream = function(path, params){
-  return (new TwitStreamMock({tweets:this._tweetsMock, singleRun: this._singleRun})).start();
+  return (new TwitStreamMock({
+    tweets:this._tweetsMock,
+    singleRun: this._singleRun,
+    timeSpeed: this._timeSpeed
+  })).start();
 };
 
 /*
@@ -40,12 +57,17 @@ TwitMock.prototype.stream = function(path, params){
  * - connect
  * - connected
  * - tweet : will read the inputTweetsMocks file and emit the tweet found inside
+ * @param {Object} [options] @optional (since it's a mock, no credentials needed
+ * @param {Array} [options.tweets] @optional (by default will load `/mocks/data/tweets.json`)
+ * @param {Boolean} [options.singleRun=true] @optional if false will loop on the tweets mock array until you call stop (default true)
+ * @param {Number} [options.timeSpeed=100] @optional delay between each tweets emitted in ms (default 100ms)
  */
 var TwitStreamMock = function(options){
   
   options = typeof options === 'undefined' ? {} : options;
   options.tweets = typeof options.tweets === 'undefined' ? require('./data/tweets.json') : options.tweets;
   options.singleRun = typeof options.singleRun === 'undefined' ? true : options.singleRun;
+  options.timeSpeed = typeof options.timeSpeed === 'undefined' ? 100 : options.timeSpeed;
   
   this.currentTweetIndex = 0;
 
@@ -64,7 +86,7 @@ var TwitStreamMock = function(options){
   
     var emitTweetCb = function(){
       var that = this;
-      setTimeout(function(){
+      nextLoop(function(){
         //only send tweet if the stream hasn't been stopped
         if(that.abortedBy === null){
           //emit the tweet
@@ -86,18 +108,18 @@ var TwitStreamMock = function(options){
           }
           emitTweetCb.call(that);
         }
-      },1*timerMultiplier);
+      },1*options.timeSpeed);
     };
     
-    setTimeout(function(){
+    nextLoop(function(){
       that.emit('connect');
     },0);
-    setTimeout(function(){
+    nextLoop(function(){
       that.emit('connected');
-    },1*timerMultiplier);
-    setTimeout(function(){
+    },1*options.timeSpeed);
+    nextLoop(function(){
       emitTweetCb.call(that);
-    },2*timerMultiplier);
+    },2*options.timeSpeed);
     
     return this;
   };

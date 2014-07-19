@@ -14,15 +14,15 @@ var channelsInput = {
 
 describe('client.streamChannels(options) - events (offline)',function(){
   
-//  //specific matchers
-//  beforeEach(function() {
-//    var matchers = {
-//      toBeGreaterThanOrEqualTo: function(a) {
-//        return this.actual >= a;
-//      }
-//    };
-//    this.addMatchers(matchers);
-//  });
+  //specific matchers
+  beforeEach(function() {
+    var matchers = {
+      toBeGreaterThanOrEqualTo: function(a) {
+        return this.actual >= a;
+      }
+    };
+    this.addMatchers(matchers);
+  });
 
   describe("> .on('channels')",function(){
     
@@ -32,15 +32,12 @@ describe('client.streamChannels(options) - events (offline)',function(){
     beforeEach(function(){
       
       runs(function(){
-        //no need to reinstantiate the stream for each "it", only the first (they all use the same tests results)
-        if(typeof trappedTweets === 'undefined'){
-          trappedTweets = [];
-          stream = client.streamChannels({track: channelsInput});
+        trappedTweets = [];
+        stream = client.streamChannels({track: channelsInput});
 
-          stream.on('channels',function(tweet){
-            trappedTweets.push(tweet);
-          });
-        }
+        stream.on('channels',function(tweet){
+          trappedTweets.push(tweet);
+        });
       });
 
       waitsFor(function(){
@@ -52,8 +49,8 @@ describe('client.streamChannels(options) - events (offline)',function(){
       
     });
     
-    it('should have trapped 10 tweets via the callback on the event',function(){
-      expect(trappedTweets.length).toBe(10);
+    it('should have trapped at least 10 tweets via the callback on the event',function(){
+      expect(trappedTweets.length).toBeGreaterThanOrEqualTo(10);
     });
     
     it('should have trapped tweets with $channels',function(){
@@ -77,14 +74,12 @@ describe('client.streamChannels(options) - events (offline)',function(){
       
       runs(function(){
         //no need to reinstantiate the stream for each "it", only the first (they all use the same tests results)
-        if(typeof trappedTweets === 'undefined'){
-          trappedTweets = [];
-          stream = client.streamChannels({track: channelsInput});
+        trappedTweets = [];
+        stream = client.streamChannels({track: channelsInput});
 
-          stream.on('channels/fruits',function(tweet){
-            trappedTweets.push(tweet);
-          });
-        }
+        stream.on('channels/fruits',function(tweet){
+          trappedTweets.push(tweet);
+        });
       });
 
       waitsFor(function(){
@@ -96,8 +91,8 @@ describe('client.streamChannels(options) - events (offline)',function(){
       
     });
     
-    it('should have trapped 10 tweets via the callback on the event',function(){
-      expect(trappedTweets.length).toBe(10);
+    it('should have trapped at least 10 tweets via the callback on the event',function(){
+      expect(trappedTweets.length).toBeGreaterThanOrEqualTo(10);
     });
     
     it('should have trapped tweets with $channels',function(){
@@ -120,20 +115,17 @@ describe('client.streamChannels(options) - events (offline)',function(){
     beforeEach(function(){
       
       runs(function(){
-        //no need to reinstantiate the stream for each "it", only the first (they all use the same tests results)
-        if(typeof trappedTweets === 'undefined'){
-          trappedTweets = [];
-          stream = client.streamChannels({
-            track: channelsInput,
-            enableChannelsEvents:false,
-            enableRootChannelsEvent:false,
-            enableKeywordsEvents:true
-          });
+        trappedTweets = [];
+        stream = client.streamChannels({
+          track: channelsInput,
+          enableChannelsEvents:false,
+          enableRootChannelsEvent:false,
+          enableKeywordsEvents:true
+        });
 
-          stream.on('keywords/orange',function(tweet){
-            trappedTweets.push(tweet);
-          });
-        }
+        stream.on('keywords/orange',function(tweet){
+          trappedTweets.push(tweet);
+        });
       });
 
       waitsFor(function(){
@@ -145,8 +137,8 @@ describe('client.streamChannels(options) - events (offline)',function(){
       
     });
     
-    it('should have trapped  10 tweets via the callback on the event',function(){
-      expect(trappedTweets.length).toBe(10);
+    it('should have trapped at least 10 tweets via the callback on the event',function(){
+      expect(trappedTweets.length).toBeGreaterThanOrEqualTo(10);
     });
     
     it('should have trapped tweets with $channels',function(){
