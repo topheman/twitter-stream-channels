@@ -20,7 +20,7 @@ file `my.twitter.credentials.json`
 	"access_token_secret": "XXXXX"
 }
 ```
-
+example
 ```js
 var TwitterStreamChannels = require('twitter-stream-channels');
 var credentials = require('./my.twitter.credentials.json');
@@ -68,7 +68,7 @@ setTimeout(function(){
 
 You can find an API doc generated from the source code on [http://labs.topheman.com/twitter-stream-channels/](http://labs.topheman.com/twitter-stream-channels/ "http://labs.topheman.com/twitter-stream-channels/").
 
-There are also examples in the repo, and the API is not that complicated ... But something that you could enjoy is the mocked version of the module that allows you to code without needing to connect to Twitter, since it has some connection limits over every 15 minutes (those limits are not greatly specified for the streaming API).
+There are also examples in the repo, and the API is not that complicated ... But something that you could enjoy is the mocked version of the module that **allows you to code without needing to connect to Twitter**, since it has some connection limits over every 15 minutes (those limits are not greatly specified for the streaming API).
 
 With this simple code, you retrieve your fake data (see also [example](./examples/online/retrieveMockTweets.js "example")) :
 

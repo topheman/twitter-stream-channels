@@ -6,7 +6,22 @@ var credentials = require('../../twitter.credentials.json');
 
 var client = new TwitterStreamChannels(credentials);
 
-var stream = client.getApiClient().stream('statuses/filter', {track: ['worldcup']});
+var stream = client.getApiClient().stream('statuses/filter', {
+  track: [
+    'blue',
+    'white',
+    'yellow',
+    'green',
+    'orange',
+    'kiwi',
+    'apple',
+    'lemon',
+    'coconut',
+    'Luke',
+    'Leia',
+    'Han',
+    'Yoda'
+  ]});
 
 stream.on('connect', function() {
   console.log('> attempting to connect to twitter');
