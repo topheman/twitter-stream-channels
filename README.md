@@ -109,7 +109,7 @@ I use it for the unit tests of the module as well as when I code some applicatio
 		* single run : `npm run test`
 		* continuous : `npm run test-watch`
 	* online tests (need the connexion to Twitter to use the streming API) : make sure you set your credentials in the `twitter.credentials.json` file. Don't run them too many times (if you attempt too much connexion, your IP could be black listed from Twitter) :
-		* single run : `npm run test-online`
+		* single run : `npm run test-online` (none for the moment and not so sure there should be any)
 * How to generate the doc :
 	* Once :
 		* Make sure you have yuidoc, if not `npm install yuidocjs -g`

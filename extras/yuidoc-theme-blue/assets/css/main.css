@@ -765,7 +765,7 @@ kbd .cmd {
 .apis a:hover,
 .apis a:focus {
   background: #900000;
-  border-color: #AAC0FA;
+  border-color: #dfdfdf;
   color: #fff;
   outline: none;
 }

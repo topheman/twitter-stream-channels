@@ -2,6 +2,7 @@
 
 var TwitterStreamChannels = require('../../main');
 var credentials = require('../../twitter.credentials.json');
+var timeout = 3000;
 
 var client = new TwitterStreamChannels(credentials);
 
@@ -41,4 +42,4 @@ setTimeout(function() {
   stream.stop();
   console.log('> stopped stream '+count+' tweets captured');
   process.exit();
-}, 3000);
+}, timeout);

@@ -4,6 +4,7 @@
 var TwitterStreamChannels = require('../../main').getMockedClass();
 var credentials = require('../../twitter.credentials.json');//not necessary - since using mock
 var tweetsMock = require('../../mocks/data/tweets.json');
+var timeout = 12000;
 
 var client = new TwitterStreamChannels(credentials);
 
@@ -44,4 +45,4 @@ setTimeout(function() {
   stream.stop();
   console.log('> stopped stream '+count+' tweets captured on '+tweetsMock.length);
   process.exit();
-}, 10000);
+}, timeout);
