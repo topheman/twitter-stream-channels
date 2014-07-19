@@ -5,6 +5,8 @@ With the Twitter stream API, you can only open one stream at a time. So, if you 
 
 This module lets you open multiple channels with there own filters, on the same stream. And then, you can add events to each of them individually, to listen to there results, like if you had open multiple streams.
 
+twitter-stream-channels handles all the post-processing, the connexion layer (OAuth, etc ...) is handled by [twit](https://github.com/ttezel/twit). See the [FAQ](https://github.com/topheman/twitter-stream-channels#faq) about both topics.
+
 ##Installation
 
 Just run `npm install twitter-stream-channels`
@@ -96,6 +98,18 @@ var client = new TwitterStreamChannelsMocked({
 I use it for the unit tests of the module as well as when I code some application based on it.
 
 ##FAQ
+
+####How much of post-processing does this cover ?
+
+####To what events can I subscribe ?
+
+####How to unsubscribe ?
+
+####The matched keywords are lower cased, why ?
+
+####I can't connect to Twitter, or I have disconnections, how about that ?
+
+####Can I also use this module for other parts of the Twitter API than only streams ?
 
 ##For contributors
 

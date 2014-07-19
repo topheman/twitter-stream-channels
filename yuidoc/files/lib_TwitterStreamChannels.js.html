@@ -94,6 +94,8 @@
  * With the Twitter stream API, you can only open one stream at a time. So, if you have multiple filters, the tweets in result will be mixed up, you&#x27;ll need to do some post-processing.
  * 
  * This module lets you open multiple channels with there own filters, on the same stream. And then, you can add events to each of them individually, to listen to there results, like if you had open multiple streams.
+ * 
+ * twitter-stream-channels handles all the post-processing, the connexion layer (OAuth, etc ...) is handled by [twit](https://github.com/ttezel/twit). See the [FAQ](https://github.com/topheman/twitter-stream-channels#faq) about both topics.
  * @module twitter-stream-channels
  * @main twitter-stream-channels
  */
