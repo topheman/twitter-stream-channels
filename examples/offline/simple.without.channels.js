@@ -34,6 +34,6 @@ stream.on('reconnect', function (request, response, connectInterval) {
 
 setTimeout(function() {
   stream.stop();
-  console.log('> stopped stream '+count+' tweets captured on '+tweetsMock.length);
+  console.log('> stopped stream '+count+' tweets captured on '+tweetsMock.length+' in '+timeout+'ms');
   process.exit();
 }, timeout);

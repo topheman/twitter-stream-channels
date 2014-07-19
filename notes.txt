@@ -103,3 +103,12 @@ for(var channel in channels){
     });
   })(channel);
 }
+
+---------
+
+I saw curious number in the unit-tests on the events, at first sight, I thought I had an optimization problem between :
+channels
+channels/name
+keywords/name
+Each one were taking more time than the other one.
+In fact, it was only that even if I captured only 10 tweets, even more were passing by (not captured by the listener, which is normal in real life - you have to wait until a tweet "fits" to your demands)

@@ -48,6 +48,6 @@ stream.on('channels/colors', function(tweet) {
 
 setTimeout(function() {
   stream.stop();
-  console.log('> stopped stream '+count+' tweets captured');
+  console.log('> stopped stream '+count+' tweets captured in '+timeout+'ms');
   process.exit();
 }, timeout);

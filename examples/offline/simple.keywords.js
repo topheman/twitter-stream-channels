@@ -43,6 +43,6 @@ stream.on('keywords/orange',function(tweet){
 
 setTimeout(function() {
   stream.stop();
-  console.log('> stopped stream '+count+' tweets captured on '+tweetsMock.length);
+  console.log('> stopped stream '+count+' tweets captured on '+tweetsMock.length+' in '+timeout+'ms');
   process.exit();
 }, timeout);

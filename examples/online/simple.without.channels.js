@@ -23,6 +23,8 @@ var stream = client.getApiClient().stream('statuses/filter', {
     'Yoda'
   ]});
 
+var count = 0;
+
 stream.on('connect', function() {
   console.log('> attempting to connect to twitter');
 });
@@ -37,6 +39,7 @@ stream.on('disconnect', function() {
 
 stream.on('tweet', function(tweet) {
   console.log(tweet.text);
+  count++;
 });
 
 stream.on('reconnect', function (request, response, connectInterval) {
@@ -45,6 +48,6 @@ stream.on('reconnect', function (request, response, connectInterval) {
 
 setTimeout(function() {
   stream.stop();
-  console.log('> stopped stream');
+  console.log('> stopped stream '+count+' tweets captured in '+timeout+'ms');
   process.exit();
 }, timeout);
