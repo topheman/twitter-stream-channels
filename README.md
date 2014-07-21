@@ -99,17 +99,38 @@ I use it for the unit tests of the module as well as when I code some applicatio
 
 ##FAQ
 
-####How much of post-processing does this cover ?
-
 ####To what events can I subscribe ?
 
-####How to unsubscribe ?
+* `.on('channels')` : will listen to all the incoming tweets
+* `.on('channels/languages')` : will only listen to the tweets where the keywords from the channel "languages" were matched (like javascript, java, php, python or perl)
+* `.on('keywords/angularjs')` : will only listen to the tweets where the keyword "angularjs" was matched
 
 ####The matched keywords are lower cased, why ?
 
+Since the Twitter streaming filter API is case-insensitive, I lower case before matching, so the keywords matched you will find in `tweet.$channel['yourChannel']` are lower cased.
+
+####How much of post-processing does this cover ?
+
+As specified in the Twitter streaming API :
+
+> The text of the Tweet and some entity fields are considered for matches. Specifically, the text attribute of the Tweet, expanded_url and display_url for links and media, text for hashtags, and screen_name for user mentions are checked for matches.
+
+So I match your keywords not only against tweet.text but also against `expanded_url`, `display_url` and `screen_name` when they are available (this is a work you won't have to bother to do ...)
+
+####How to unsubscribe ?
+
+The object returned by `(new require('twitter-stream-channels')(credentials)).stremChannels(options)` extends the standard [events.EventEmitter of nodejs](http://nodejs.org/api/events.html), so you can use `on()`, `off()`, `addEventListener()` ...
+
 ####I can't connect to Twitter, or I have disconnections, how about that ?
 
+* First : check your credentials.
+* Second : have tried too many times to connect ? Wait a couple of minutes.
+
+If this persists, you can file an issue. But know that the twitter-stream-channels modules doesn't handle itself the network layer. I relies on [twit](https://github.com/ttezel/twit) for this part, so check if that doesn't come from it. If twit is upgraded with fixes, I will upgrade mu module.
+
 ####Can I also use this module for other parts of the Twitter API than only streams ?
+
+You can do anything the Twitter API offers, via the twit client which is exposed by getApiClient(). Once you retrieved the root client, you can call the API exposed by [twit](https://github.com/ttezel/twit) to interract with Twitter.
 
 ##For contributors
 
