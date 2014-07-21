@@ -6,7 +6,10 @@
     "linkNatives": "true",
     "attributesEmit": "false",
     "selleck": "false",
-    "paths": ["./lib"],
+    "paths": [
+      "./lib",
+      "./mocks"
+    ],
     "outdir": "./yuidoc",
     "themedir" : "./extras/yuidoc-theme-blue"
   }

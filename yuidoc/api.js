@@ -3,7 +3,8 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "MockDataRetriever",
         "StreamChannels",
-        "TwitterStreamChannels"
+        "TwitterStreamChannels",
+        "TwitterStreamChannelsMock"
     ],
     "modules": [
         "twitter-stream-channels"

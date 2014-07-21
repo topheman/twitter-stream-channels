@@ -34,6 +34,15 @@
             },
             "fors": {},
             "namespaces": {}
+        },
+        "mocks\\TwitterStreamChannels.js": {
+            "name": "mocks\\TwitterStreamChannels.js",
+            "modules": {},
+            "classes": {
+                "TwitterStreamChannelsMock": 1
+            },
+            "fors": {},
+            "namespaces": {}
         }
     },
     "modules": {
@@ -43,13 +52,14 @@
             "classes": {
                 "MockDataRetriever": 1,
                 "StreamChannels": 1,
-                "TwitterStreamChannels": 1
+                "TwitterStreamChannels": 1,
+                "TwitterStreamChannelsMock": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "main",
-            "file": "lib\\TwitterStreamChannels.js",
-            "line": 14,
+            "file": "mocks\\TwitterStreamChannels.js",
+            "line": 146,
             "description": "With the Twitter stream API, you can only open one stream at a time. So, if you have multiple filters, the tweets in result will be mixed up, you'll need to do some post-processing.\n\nThis module lets you open multiple channels with there own filters, on the same stream. And then, you can add events to each of them individually, to listen to there results, like if you had open multiple streams.\n\ntwitter-stream-channels handles all the post-processing, the connexion layer (OAuth, etc ...) is handled by [twit](https://github.com/ttezel/twit). See the [FAQ](https://github.com/topheman/twitter-stream-channels#faq) about both topics.",
             "itemtype": "main"
         }
@@ -148,7 +158,7 @@
             "namespace": "",
             "file": "lib\\StreamChannels.js",
             "line": 7,
-            "description": "The constructor itself of this class is private, you should open a StreamChannels via {{#crossLink \"TwitterStreamChannels/streamChannels\"}}TwitterStreamChannels.streamChannels(options){{/crossLink}}",
+            "description": "The constructor itself of this class is private, you should open a StreamChannels via {{#crossLink \"TwitterStreamChannels/streamChannels\"}}TwitterStreamChannels.streamChannels(options){{/crossLink}} \n\nCheck out the available events in the [README on the github repo](https://github.com/topheman/twitter-stream-channels#faq).",
             "is_constructor": 1,
             "access": "private",
             "tagname": "",
@@ -257,12 +267,61 @@
                 "description": "",
                 "type": "TwitterStreamChannels"
             }
+        },
+        "TwitterStreamChannelsMock": {
+            "name": "TwitterStreamChannelsMock",
+            "shortname": "TwitterStreamChannelsMock",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "twitter-stream-channels",
+            "namespace": "",
+            "file": "mocks\\TwitterStreamChannels.js",
+            "line": 146,
+            "description": "This class mocks {{#crossLink \"TwitterStreamChannels\"}}TwitterStreamChannels{{/crossLink}} so that you could work offline, on your own data, without connecting to Twitter.\n\nSee the examples on [the github repo](https://github.com/topheman/twitter-stream-channels/examples/offline)",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "@optional (since it's a mock, no credentials needed",
+                    "type": "Object",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "tweets",
+                            "description": "@optional (by default will load `/mocks/data/tweets.json`)",
+                            "type": "File",
+                            "optional": true
+                        },
+                        {
+                            "name": "singleRun",
+                            "description": "@optional if false will loop on the tweets mock array until you call stop (default true)",
+                            "type": "Boolean",
+                            "optional": true,
+                            "optdefault": "true"
+                        },
+                        {
+                            "name": "tweetDelay",
+                            "description": "@optional delay between each tweets emitted in ms (default 100ms)",
+                            "type": "Number",
+                            "optional": true,
+                            "optdefault": "100"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "TwitterStreamChannelsMock"
+            }
         }
     },
     "classitems": [
         {
             "file": "lib\\StreamChannels.js",
-            "line": 46,
+            "line": 48,
             "description": "Adds the events (specifics and propagated from twitter API client), according to options",
             "itemtype": "method",
             "name": "addGenericEvents",
@@ -318,7 +377,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 73,
+            "line": 75,
             "description": "Removes the events (specifics and propagated from twitter API client), according to options",
             "itemtype": "method",
             "name": "removeEvents",
@@ -360,7 +419,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 91,
+            "line": 93,
             "description": "Formats options passed with non-duplicate tracked keywords",
             "itemtype": "method",
             "name": "_getOptionsToPassToApiClient",
@@ -382,7 +441,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 112,
+            "line": 114,
             "description": "Call this function to restart the stream after you called `.stop()` on it.\n\nNote: there is no need to call `.start()` to begin streaming. ` TwitterStreamChannels.streamChannels` calls .start() for you.",
             "itemtype": "method",
             "name": "start",
@@ -395,7 +454,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 124,
+            "line": 126,
             "description": "Closes the opened stream with Twitter",
             "itemtype": "method",
             "name": "stop",
@@ -425,7 +484,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 139,
+            "line": 141,
             "description": "Returns your channel description",
             "itemtype": "method",
             "name": "getChannels",
@@ -438,7 +497,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 148,
+            "line": 150,
             "description": "Returns an array of the keywords you're tracking (duplicates were removed)",
             "itemtype": "method",
             "name": "getTrackedKeywords",
@@ -451,7 +510,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 157,
+            "line": 159,
             "description": "Returns an object key/value - key:your channels - value:the full text search RegExp for the keywords of this channel",
             "itemtype": "method",
             "name": "getchannelsKeywordsLowerCasedRegExp",
@@ -464,7 +523,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 166,
+            "line": 168,
             "description": "Removes all the listeners added\n\nSee more methods http://nodejs.org/api/events.html#events_events",
             "itemtype": "method",
             "name": "removeAllListeners",
@@ -484,7 +543,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 346,
+            "line": 348,
             "description": "From http://docs.closure-library.googlecode.com/git/local_closure_goog_string_string.js.source.html#line1015\nEscapes characters in the string that are not safe to use in a RegExp.",
             "params": [
                 {
@@ -509,7 +568,7 @@
             "static": 1,
             "return": {
                 "description": "",
-                "type": "TwitterStreamChannels"
+                "type": "TwitterStreamChannelsMock"
             },
             "class": "TwitterStreamChannels",
             "module": "twitter-stream-channels"
@@ -660,6 +719,67 @@
             },
             "class": "TwitterStreamChannels",
             "module": "twitter-stream-channels"
+        },
+        {
+            "file": "mocks\\TwitterStreamChannels.js",
+            "line": 162,
+            "description": "Returns a mocked version of apiClient, only the .stream() method is mocked (will stream exactly the same tweets as {{#crossLink \"TwitterStreamChannelsMock/streamChannels\"}}stream.streamChannels(){{/crossLink}})",
+            "itemtype": "method",
+            "name": "getApiClient",
+            "return": {
+                "description": "",
+                "type": "TwitMock"
+            },
+            "class": "TwitterStreamChannelsMock",
+            "module": "twitter-stream-channels"
+        },
+        {
+            "file": "mocks\\TwitterStreamChannels.js",
+            "line": 171,
+            "description": "Mocks the {{#crossLink \"TwitterStreamChannels/streamChannels\"}}TwitterStreamChannels.streamChannels(options){{/crossLink}} method of TwitterStreamChannels to return a StreamChannels object\n\nWill start to emit the tweets you specified in the tweets attributes in the constructor.",
+            "itemtype": "method",
+            "name": "streamChannels",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "track",
+                            "description": "Pass an object describing your channels. If you don't want to use channels, you can pass directly an array of keywords.",
+                            "type": "Object|Array"
+                        },
+                        {
+                            "name": "enableChannelsEvents",
+                            "description": "If true, will fire the events like 'channels/channelName'",
+                            "type": "Object",
+                            "optional": true,
+                            "optdefault": "true"
+                        },
+                        {
+                            "name": "enableRootChannelsEvent",
+                            "description": "If true, will fire the event 'channels'",
+                            "type": "Object",
+                            "optional": true,
+                            "optdefault": "true"
+                        },
+                        {
+                            "name": "enableKeywordsEvents",
+                            "description": "If true, will fire the events 'keywords/keywordName' (disabled by default)",
+                            "type": "Object",
+                            "optional": true,
+                            "optdefault": "false"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "StreamChannels"
+            },
+            "class": "TwitterStreamChannelsMock",
+            "module": "twitter-stream-channels"
         }
     ],
     "warnings": [
@@ -669,55 +789,63 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " lib\\StreamChannels.js:46"
+            "line": " lib\\StreamChannels.js:48"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:46"
+            "line": " lib\\StreamChannels.js:48"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " lib\\StreamChannels.js:73"
+            "line": " lib\\StreamChannels.js:75"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:73"
+            "line": " lib\\StreamChannels.js:75"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:91"
+            "line": " lib\\StreamChannels.js:93"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:112"
+            "line": " lib\\StreamChannels.js:114"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:124"
+            "line": " lib\\StreamChannels.js:126"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:139"
+            "line": " lib\\StreamChannels.js:141"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:148"
+            "line": " lib\\StreamChannels.js:150"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:157"
+            "line": " lib\\StreamChannels.js:159"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:166"
+            "line": " lib\\StreamChannels.js:168"
         },
         {
             "message": "replacing incorrect tag: returns with return",
             "line": " lib\\TwitterStreamChannels.js:109"
         },
         {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " mocks\\TwitterStreamChannels.js:146"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " mocks\\TwitterStreamChannels.js:162"
+        },
+        {
             "message": "Missing item type\nFrom http://docs.closure-library.googlecode.com/git/local_closure_goog_string_string.js.source.html#line1015\nEscapes characters in the string that are not safe to use in a RegExp.",
-            "line": " lib\\StreamChannels.js:346"
+            "line": " lib\\StreamChannels.js:348"
         }
     ]
 }

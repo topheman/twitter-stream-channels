@@ -45,6 +45,8 @@
             
                 <li><a href="../classes/TwitterStreamChannels.html">TwitterStreamChannels</a></li>
             
+                <li><a href="../classes/TwitterStreamChannelsMock.html">TwitterStreamChannelsMock</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -166,7 +168,7 @@ var TwitterStreamChannels = function(credentials) {
  * Returns a mocked object of TwitterStreamChannels on which you will be able to play your scenarios offline with your own mocked tweets
  * @method getMockedClass
  * @static
- * @return {TwitterStreamChannels}
+ * @return {TwitterStreamChannelsMock}
  */
 TwitterStreamChannels.getMockedClass = function(){
   return require(&#x27;../mocks/TwitterStreamChannels&#x27;);
