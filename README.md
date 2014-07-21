@@ -111,7 +111,7 @@ Since the Twitter streaming filter API is case-insensitive, I lower case before 
 
 ####How much of post-processing does this cover ?
 
-As specified in the Twitter streaming API :
+As specified in the [Twitter streaming API](https://dev.twitter.com/docs/streaming-apis/parameters#track) :
 
 > The text of the Tweet and some entity fields are considered for matches. Specifically, the text attribute of the Tweet, expanded_url and display_url for links and media, text for hashtags, and screen_name for user mentions are checked for matches.
 
