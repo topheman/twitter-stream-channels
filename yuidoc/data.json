@@ -419,7 +419,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 93,
+            "line": 92,
             "description": "Formats options passed with non-duplicate tracked keywords",
             "itemtype": "method",
             "name": "_getOptionsToPassToApiClient",
@@ -441,7 +441,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 114,
+            "line": 113,
             "description": "Call this function to restart the stream after you called `.stop()` on it.\n\nNote: there is no need to call `.start()` to begin streaming. ` TwitterStreamChannels.streamChannels` calls .start() for you.",
             "itemtype": "method",
             "name": "start",
@@ -454,7 +454,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 126,
+            "line": 125,
             "description": "Closes the opened stream with Twitter",
             "itemtype": "method",
             "name": "stop",
@@ -484,7 +484,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 141,
+            "line": 140,
             "description": "Returns your channel description",
             "itemtype": "method",
             "name": "getChannels",
@@ -497,7 +497,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 150,
+            "line": 149,
             "description": "Returns an array of the keywords you're tracking (duplicates were removed)",
             "itemtype": "method",
             "name": "getTrackedKeywords",
@@ -510,7 +510,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 159,
+            "line": 158,
             "description": "Returns an object key/value - key:your channels - value:the full text search RegExp for the keywords of this channel",
             "itemtype": "method",
             "name": "getchannelsKeywordsLowerCasedRegExp",
@@ -523,7 +523,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 168,
+            "line": 167,
             "description": "Removes all the listeners added\n\nSee more methods http://nodejs.org/api/events.html#events_events",
             "itemtype": "method",
             "name": "removeAllListeners",
@@ -543,7 +543,7 @@
         },
         {
             "file": "lib\\StreamChannels.js",
-            "line": 348,
+            "line": 350,
             "description": "From http://docs.closure-library.googlecode.com/git/local_closure_goog_string_string.js.source.html#line1015\nEscapes characters in the string that are not safe to use in a RegExp.",
             "params": [
                 {
@@ -805,31 +805,31 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:93"
+            "line": " lib\\StreamChannels.js:92"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:114"
+            "line": " lib\\StreamChannels.js:113"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:126"
+            "line": " lib\\StreamChannels.js:125"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:141"
+            "line": " lib\\StreamChannels.js:140"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:150"
+            "line": " lib\\StreamChannels.js:149"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:159"
+            "line": " lib\\StreamChannels.js:158"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " lib\\StreamChannels.js:168"
+            "line": " lib\\StreamChannels.js:167"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -845,7 +845,7 @@
         },
         {
             "message": "Missing item type\nFrom http://docs.closure-library.googlecode.com/git/local_closure_goog_string_string.js.source.html#line1015\nEscapes characters in the string that are not safe to use in a RegExp.",
-            "line": " lib\\StreamChannels.js:348"
+            "line": " lib\\StreamChannels.js:350"
         }
     ]
 }
