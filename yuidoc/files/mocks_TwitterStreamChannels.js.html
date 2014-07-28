@@ -269,9 +269,9 @@ TwitterStreamChannelsMock.prototype.getApiClient = function(){
  * @method streamChannels
  * @param {Object} options
  * @param {Object|Array} options.track Pass an object describing your channels. If you don&#x27;t want to use channels, you can pass directly an array of keywords.
- * @param {Object} [options.enableChannelsEvents=true] If true, will fire the events like &#x27;channels/channelName&#x27;
- * @param {Object} [options.enableRootChannelsEvent=true] If true, will fire the event &#x27;channels&#x27;
- * @param {Object} [options.enableKeywordsEvents=false] If true, will fire the events &#x27;keywords/keywordName&#x27; (disabled by default)
+ * @param {Boolean} [options.enableChannelsEvents=true] If true, will fire the events like &#x27;channels/channelName&#x27;
+ * @param {Boolean} [options.enableRootChannelsEvent=true] If true, will fire the event &#x27;channels&#x27;
+ * @param {Boolean} [options.enableKeywordsEvents=false] If true, will fire the events &#x27;keywords/keywordName&#x27; (disabled by default)
  * @return {StreamChannels}
  */
 TwitterStreamChannelsMock.prototype.streamChannels = function(options){

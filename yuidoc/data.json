@@ -194,21 +194,21 @@
                         {
                             "name": "enableChannelsEvents",
                             "description": "If true, will fire the events like 'channels/channelName'",
-                            "type": "Object",
+                            "type": "Boolean",
                             "optional": true,
                             "optdefault": "true"
                         },
                         {
                             "name": "enableRootChannelsEvent",
                             "description": "If true, will fire the event 'channels'",
-                            "type": "Object",
+                            "type": "Boolean",
                             "optional": true,
                             "optdefault": "true"
                         },
                         {
                             "name": "enableKeywordsEvents",
                             "description": "If true, will fire the events 'keywords/keywordName' (disabled by default)",
-                            "type": "Object",
+                            "type": "Boolean",
                             "optional": true,
                             "optdefault": "false"
                         }
@@ -347,21 +347,21 @@
                         {
                             "name": "enableChannelsEvents",
                             "description": "If true, will fire the events like 'channels/channelName'",
-                            "type": "Object",
+                            "type": "Boolean",
                             "optional": true,
                             "optdefault": "true"
                         },
                         {
                             "name": "enableRootChannelsEvent",
                             "description": "If true, will fire the event 'channels'",
-                            "type": "Object",
+                            "type": "Boolean",
                             "optional": true,
                             "optdefault": "true"
                         },
                         {
                             "name": "enableKeywordsEvents",
                             "description": "If true, will fire the events 'keywords/keywordName' (disabled by default)",
-                            "type": "Object",
+                            "type": "Boolean",
                             "optional": true,
                             "optdefault": "false"
                         }
@@ -692,21 +692,21 @@
                         {
                             "name": "enableChannelsEvents",
                             "description": "If true, will fire the events like 'channels/channelName'",
-                            "type": "Object",
+                            "type": "Boolean",
                             "optional": true,
                             "optdefault": "true"
                         },
                         {
                             "name": "enableRootChannelsEvent",
                             "description": "If true, will fire the event 'channels'",
-                            "type": "Object",
+                            "type": "Boolean",
                             "optional": true,
                             "optdefault": "true"
                         },
                         {
                             "name": "enableKeywordsEvents",
                             "description": "If true, will fire the events 'keywords/keywordName' (disabled by default)",
-                            "type": "Object",
+                            "type": "Boolean",
                             "optional": true,
                             "optdefault": "false"
                         }
@@ -753,21 +753,21 @@
                         {
                             "name": "enableChannelsEvents",
                             "description": "If true, will fire the events like 'channels/channelName'",
-                            "type": "Object",
+                            "type": "Boolean",
                             "optional": true,
                             "optdefault": "true"
                         },
                         {
                             "name": "enableRootChannelsEvent",
                             "description": "If true, will fire the event 'channels'",
-                            "type": "Object",
+                            "type": "Boolean",
                             "optional": true,
                             "optdefault": "true"
                         },
                         {
                             "name": "enableKeywordsEvents",
                             "description": "If true, will fire the events 'keywords/keywordName' (disabled by default)",
-                            "type": "Object",
+                            "type": "Boolean",
                             "optional": true,
                             "optdefault": "false"
                         }
