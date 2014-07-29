@@ -37,7 +37,7 @@ stream.on('disconnect', function() {
 
 //we only track the tweets about apple
 stream.on('keywords/orange',function(tweet){
-  console.log(tweet.$channels,tweet.text);
+  console.log(tweet.$channels,tweet.$keywords,tweet.text);
   count++;
 });
 

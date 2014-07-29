@@ -34,7 +34,7 @@ stream.on('disconnect', function() {
 });
 
 stream.on('channels',function(tweet){
-  console.log(tweet.$channels,tweet.text);
+  console.log(tweet.$channels,tweet.$keywords,tweet.text);
   count++;
 });
 

@@ -42,7 +42,7 @@ stream.on('warning', function(msg) {
 });
 
 stream.on('channels/colors', function(tweet) {
-  console.log(tweet.$channels,tweet.text);
+  console.log(tweet.$channels,tweet.$keywords,tweet.text);
   count++;
 });
 

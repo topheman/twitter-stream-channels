@@ -63,6 +63,16 @@ describe('client.streamChannels(options) - events (offline)',function(){
       expect(trappedTweets[9].$channels['fruits']).toEqual(['apple']);
     });
     
+    it('should have trapped tweets with $keywords',function(){
+      expect(trappedTweets[0].$keywords).toBeDefined();
+      expect(trappedTweets[9].$keywords).toBeDefined();
+    });
+    
+    it('$keywords should have correct keywords in it',function(){
+      expect(trappedTweets[0].$keywords).toEqual(['green']);
+      expect(trappedTweets[9].$keywords).toEqual(['apple']);
+    });
+    
   });
 
   describe("> .on('channels/fruits')",function(){

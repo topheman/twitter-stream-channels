@@ -105,9 +105,17 @@ I use it for the unit tests of the module as well as when I code some applicatio
 * `.on('channels/languages')` : will only listen to the tweets where the keywords from the channel "languages" were matched (like javascript, java, php, python or perl)
 * `.on('keywords/angularjs')` : will only listen to the tweets where the keyword "angularjs" was matched
 
+####Where do I find out the matched keywords and channels ?
+
+Two attributes are added to the tweet you retrieve :
+
+* $channels : an kay/value object : key : name of the channel, value : array of keywords retrieved in this channel on this tweet
+* $keywords : an array of all the keywords you're following that we're matched on this tweet.
+
+
 ####The matched keywords are lower cased, why ?
 
-Since the Twitter streaming filter API is case-insensitive, I lower case before matching, so the keywords matched you will find in `tweet.$channel['yourChannel']` are lower cased.
+Since the Twitter streaming filter API is case-insensitive, I lower case before matching, so the keywords matched you will find in `tweet.$channels['yourChannel']` are lower cased.
 
 ####How much of post-processing does this cover ?
 
