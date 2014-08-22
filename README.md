@@ -109,8 +109,8 @@ I use it for the unit tests of the module as well as when I code some applicatio
 
 Two attributes are added to the tweet you retrieve :
 
-* $channels : an kay/value object : key : name of the channel, value : array of keywords retrieved in this channel on this tweet
-* $keywords : an array of all the keywords you're following that we're matched on this tweet.
+* $channels : a key/value object : key : name of the channel, value : array of keywords retrieved in this channel on this tweet
+* $keywords : an array of all the keywords you're following that were matched on this tweet.
 
 
 ####The matched keywords are lower cased, why ?
@@ -134,7 +134,7 @@ The object returned by `(new require('twitter-stream-channels')(credentials)).st
 * First : check your credentials.
 * Second : have tried too many times to connect ? Wait a couple of minutes.
 
-If this persists, you can file an issue. But know that the twitter-stream-channels modules doesn't handle itself the network layer. I relies on [twit](https://github.com/ttezel/twit) for this part, so check if that doesn't come from it. If twit is upgraded with fixes, I will upgrade mu module.
+If this persists, you can file an issue. But know that the twitter-stream-channels modules doesn't handle itself the network layer. It relies on [twit](https://github.com/ttezel/twit) for this part, so check if that doesn't come from it. If twit is upgraded with fixes, I will upgrade my module.
 
 ####Can I also use this module for other parts of the Twitter API than only streams ?
 
@@ -146,12 +146,12 @@ You can do anything the Twitter API offers, via the twit client which is exposed
 	* Once you've git cloned this repo, just `npm install` to install the dependencies.
 	* If you don't have jasmine-node globally, run `sudo npm install jasmine-node@1.14.2 -g` (specified version - for the moment last version is buggy) to install the jasmine framework + test runner for node that will let you run the unit tests
 	* If you plan to generate doc, and don't have yuidoc gobally, run `npm install yuidocjs -g`
-	* If you wan't yo execute the examples or online tests, copy `twitter.credentials.default.json` to `twitter.credentials.json`, set your own credentials (you can get some at [https://apps.twitter.com/app/new](https://apps.twitter.com/app/new) if you don't have some already)
+	* If you want to execute the examples or online tests, copy `twitter.credentials.default.json` to `twitter.credentials.json`, set your own credentials (you can get some at [https://apps.twitter.com/app/new](https://apps.twitter.com/app/new) if you don't have any already)
 * How to run the tests : 
-	* offline tests (don't need AND won't create any connection to Twitter) - run them as many time as you want :
+	* offline tests (don't need AND won't create any connexion to Twitter) - run them as many time as you want :
 		* single run : `npm run test`
-		* continuous : `npm run test-watch`
-	* online tests (need the connexion to Twitter to use the streming API) : make sure you set your credentials in the `twitter.credentials.json` file. Don't run them too many times (if you attempt too much connexion, your IP could be black listed from Twitter) :
+		* continuous : `npm run test-watch` (I set it up but don't use it for the moment)
+	* online tests (needs the connexion to Twitter to use the streming API) : make sure you set your credentials in the `twitter.credentials.json` file. Don't run them too many times (if you attempt too much connexion, your IP could be black listed from Twitter) :
 		* single run : `npm run test-online` (none for the moment and not so sure there should be any)
 * How to generate the doc :
 	* Once :
