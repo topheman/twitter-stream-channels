@@ -1,6 +1,6 @@
 <h1>Welcome</h1>
 <p>This doc was generated from the twitter-stream-channels source code with yuidoc.</p>
-<h3 style="font-weight:bold;font-size:130%;"><a href="./classes/TwitterStreamChannels.html" title="Get started">Your point of entry is the TwitterStreamChannels class</a></h3>
+<h3 style="font-weight:bold;font-size:170%;"><a href="./classes/TwitterStreamChannels.html" title="Get started">Your point of entry is the TwitterStreamChannels class</a></h3>
 <hr>
 <p>
   You can also find informations on :
@@ -9,3 +9,8 @@
     <li><a href="https://www.npmjs.org/package/twitter-stream-channels" title="twitter-stream-channels on npm">npm</a> - to install the module : <code>npm install twitter-stream-channels</code></li>
   </ul>
 </p>
+<div class="intro">
+  <p>With the Twitter stream API, you can only open one stream at a time. So, if you have multiple filters, the tweets in result will be mixed up, you&#39;ll need to do some post-processing.</p>
+  <p>This module lets you open multiple channels with there own filters, on the same stream. And then, you can add events to each of them individually, to listen to there results, like if you had open multiple streams.</p>
+  <p>twitter-stream-channels handles all the post-processing, the connexion layer (OAuth, etc ...) is handled by <a href="https://github.com/ttezel/twit">twit</a>. See the <a href="https://github.com/topheman/twitter-stream-channels#faq">FAQ</a> about both topics.</p>
+</div>
