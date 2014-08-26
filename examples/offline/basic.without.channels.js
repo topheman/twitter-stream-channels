@@ -6,6 +6,7 @@ var credentials = require('../../twitter.credentials.json');//not necessary - si
 credentials.singleRun = false;//to loop indefinitly on the mocked tweets
 
 var client = new TwitterStreamChannels(credentials);
+var connected = false;
 
 var stream = client.getApiClient().stream('statuses/filter', {track: ['any,word,in,the,mock,data']});
 
@@ -14,11 +15,15 @@ stream.on('connect', function() {
 });
 
 stream.on('connected', function() {
-  console.log('> twitter emit : connected');
+  if(connected === false){
+    console.log('> twitter emit : connected');
+    connected = true;
+  }
 });
 
 stream.on('disconnect', function() {
   console.log('> twitter emit : disconnect');
+  connected = false;
 });
 
 stream.on('tweet', function(tweet) {

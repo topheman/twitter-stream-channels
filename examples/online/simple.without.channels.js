@@ -5,6 +5,7 @@ var credentials = require('../../twitter.credentials.json');
 var timeout = 3000;
 
 var client = new TwitterStreamChannels(credentials);
+var connected = false;
 
 var stream = client.getApiClient().stream('statuses/filter', {
   track: [
@@ -30,11 +31,15 @@ stream.on('connect', function() {
 });
 
 stream.on('connected', function() {
-  console.log('> twitter emit : connected');
+  if(connected === false){
+    console.log('> twitter emit : connected');
+    connected = true;
+  }
 });
 
 stream.on('disconnect', function() {
   console.log('> twitter emit : disconnect');
+  connected = false;
 });
 
 stream.on('tweet', function(tweet) {

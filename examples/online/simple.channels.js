@@ -5,6 +5,7 @@ var credentials = require('../../twitter.credentials.json');
 var timeout = 10000;
 
 var client = new TwitterStreamChannels(credentials);
+var connected = false;
 
 var channelsInput = {
   "colors": "blue,white,yellow,green,orange",
@@ -26,11 +27,15 @@ stream.on('connect', function() {
 });
 
 stream.on('connected', function(msg) {
-  console.log('> twitter emit : connected - listening to channel "colors"');
+  if(connected === false){
+    console.log('> twitter emit : connected - listening to channel "colors"');
+    connected = true;
+  }
 });
 
 stream.on('disconnect', function(msg) {
   console.log('> twitter emit : disconnect');
+  connected = false;
 });
 
 stream.on('reconnect', function(msg) {

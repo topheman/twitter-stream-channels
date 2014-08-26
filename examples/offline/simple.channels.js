@@ -6,6 +6,7 @@ var tweetsMock = require('../../mocks/data/tweets.json');
 var timeout = 7000;
 
 var client = new TwitterStreamChannels(credentials);
+var connected = false;
 
 var channelsInput = {
   "colors": "blue,white,yellow,green,orange",
@@ -27,11 +28,15 @@ stream.on('connect', function() {
 });
 
 stream.on('connected', function() {
-  console.log('> twitter emit : connected - listening to channel "fruits"');
+  if(connected === false){
+    console.log('> twitter emit : connected - listening to channel "fruits"');
+    connected = true;
+  }
 });
 
 stream.on('disconnect', function() {
   console.log('> twitter emit : disconnect');
+  connected = false;
 });
 
 stream.on('channels/fruits',function(tweet){
