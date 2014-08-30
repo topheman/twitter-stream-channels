@@ -280,7 +280,7 @@
             "namespace": "",
             "file": "mocks/TwitterStreamChannels.js",
             "line": 146,
-            "description": "This class mocks {{#crossLink \"TwitterStreamChannels\"}}TwitterStreamChannels{{/crossLink}} so that you could work offline, on your own data, without connecting to Twitter.\n\nSee the examples on [the github repo](https://github.com/topheman/twitter-stream-channels/examples/offline)",
+            "description": "This class mocks {{#crossLink \"TwitterStreamChannels\"}}TwitterStreamChannels{{/crossLink}} so that you could work offline, on your own data, without connecting to Twitter.\n\nSee the examples on [the github repo](https://github.com/topheman/twitter-stream-channels/tree/master/examples)",
             "is_constructor": 1,
             "params": [
                 {

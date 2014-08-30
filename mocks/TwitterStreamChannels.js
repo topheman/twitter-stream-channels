@@ -146,7 +146,7 @@ util.inherits(TwitStreamMock, EventEmitter);
 /**
  * This class mocks {{#crossLink "TwitterStreamChannels"}}TwitterStreamChannels{{/crossLink}} so that you could work offline, on your own data, without connecting to Twitter.
  * 
- * See the examples on [the github repo](https://github.com/topheman/twitter-stream-channels/examples/offline)
+ * See the examples on [the github repo](https://github.com/topheman/twitter-stream-channels/tree/master/examples)
  * @class TwitterStreamChannelsMock
  * @constructor
  * @param {Object} [options] @optional (since it's a mock, no credentials needed
