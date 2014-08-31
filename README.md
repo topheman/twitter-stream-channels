@@ -7,6 +7,8 @@ This module lets you open multiple channels with there own filters, on the same 
 
 twitter-stream-channels handles all the post-processing, the connexion layer (OAuth, etc ...) is handled by [twit](https://github.com/ttezel/twit). See the [FAQ](https://github.com/topheman/twitter-stream-channels#faq) about both topics.
 
+You can see [Topheman Datavisual](http://topheman-datavisual.herokuapp.com/) which is a project I made, using this module for the Twitter Stream part.
+
 ##Installation
 
 Just run `npm install twitter-stream-channels`
