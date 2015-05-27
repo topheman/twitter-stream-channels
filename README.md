@@ -65,7 +65,7 @@ stream.on('channels/web',function(tweet){
 //});
 
 setTimeout(function(){
-    stream.close();//closes the stream connected to Twitter
+    stream.stop();//closes the stream connected to Twitter
 	console.log('>stream closed after 100 seconds');
 },100000);
 ```
