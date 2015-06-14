@@ -131,7 +131,7 @@ So I match your keywords not only against tweet.text but also against `expanded_
 
 ####How to unsubscribe ?
 
-The object returned by `(new require('twitter-stream-channels')(credentials)).stremChannels(options)` extends the standard [events.EventEmitter of nodejs](http://nodejs.org/api/events.html), so you can use `on()`, `off()`, `addEventListener()` ...
+The object returned by `(new require('twitter-stream-channels')(credentials)).streamChannels(options)` extends the standard [events.EventEmitter of nodejs](http://nodejs.org/api/events.html), so you can use `on()`, `off()`, `addEventListener()` ...
 
 ####I can't connect to Twitter, or I have disconnections, how about that ?
 
@@ -155,7 +155,7 @@ You can do anything the Twitter API offers, via the twit client which is exposed
 	* offline tests (don't need AND won't create any connexion to Twitter) - run them as many time as you want :
 		* single run : `npm run test`
 		* continuous : `npm run test-watch` (I set it up but don't use it for the moment)
-	* online tests (needs the connexion to Twitter to use the streming API) : make sure you set your credentials in the `twitter.credentials.json` file. Don't run them too many times (if you attempt too much connexion, your IP could be black listed from Twitter) :
+	* online tests (needs the connexion to Twitter to use the streaming API) : make sure you set your credentials in the `twitter.credentials.json` file. Don't run them too many times (if you attempt too much connexion, your IP could be black listed from Twitter) :
 		* single run : `npm run test-online` (none for the moment and not so sure there should be any)
 * How to generate the doc :
 	* Once :
