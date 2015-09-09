@@ -1,3 +1,11 @@
+## 0.2.4 (2015-09-09)
+
+No changes in the API, only changed documentation generation routine:
+
+* upgraded to latest yuidoc version
+* now rely on local yuidoc in dev dependencies
+* fixed some bugs on the yuidoc theme
+
 ## 0.2.3 (2015-06-14)
 
 * fix typos in README

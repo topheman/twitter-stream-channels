@@ -1,6 +1,6 @@
 {
   "name": "twitter-stream-channels",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Manage multiple filters on the same Twitter stream",
   "keywords": [
     "twitter",
@@ -24,7 +24,7 @@
   },
   "main": "./lib/TwitterStreamChannels",
   "scripts": {
-    "yuidoc": "node_modules/.bin/yuidoc -c yuidoc.json --project-version 0.2.3",
+    "yuidoc": "node_modules/.bin/yuidoc -c yuidoc.json --project-version 0.2.4",
     "test": "jasmine-node spec/offline --verbose --config highSpeed true",
     "test-watch": "jasmine-node spec/offline --autotest --config highSpeed true --watch .",
     "test-online": "jasmine-node spec/online --verbose"

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" class="yui-overrride">
+<head>
+    <meta charset="utf-8">
+    <title>TwitterStreamChannelsMock - twitter-stream-channels</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            <h1 class="blue-main-title">twitter-stream-channels</h1>
+        </div>
+        <div class="yui3-u-1-4 version project-version">
+            API Docs for: 0.2.4
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/MockDataRetriever.html">MockDataRetriever</a></li>
+                                <li><a href="../classes/StreamChannels.html">StreamChannels</a></li>
+                                <li><a href="../classes/TwitterStreamChannels.html">TwitterStreamChannels</a></li>
+                                <li><a href="../classes/TwitterStreamChannelsMock.html">TwitterStreamChannelsMock</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/twitter-stream-channels.html">twitter-stream-channels</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+<div class="apidocs">
+<div id="docs-main">
+<div class="content">
+<h1>TwitterStreamChannelsMock</h1>
+<div class="meta">
+
+
+        <div class="foundat">
+            Defined in: <a href="../files/mocks_TwitterStreamChannels.js.html#l146"><code>mocks&#x2F;TwitterStreamChannels.js:146</code></a>
+        </div>
+
+            Module: <a href="../modules/twitter-stream-channels.html">twitter-stream-channels</a>
+
+</div>
+
+
+<h3>Summary</h3>
+<div class="intro">
+    <p>This class mocks <a href="../classes/TwitterStreamChannels.html" class="crosslink">TwitterStreamChannels</a> so that you could work offline, on your own data, without connecting to Twitter.</p>
+<p>See the examples on <a href="https://github.com/topheman/twitter-stream-channels/tree/master/examples">the github repo</a></p>
+
+</div>
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_TwitterStreamChannelsMock" class="method item">
+          <h3 class="blue-method-name">TwitterStreamChannelsMock</h3>
+        
+          <div class="meta method-meta">
+              <p>
+                  Defined in
+              <a href="../files/mocks_TwitterStreamChannels.js.html#l146"><code>mocks&#x2F;TwitterStreamChannels.js:146</code></a>
+          </p>
+        
+        
+        
+          </div>
+        
+          <h3>Syntax</h3>
+          <div class="blue-method-syntax">
+          <h3 class="name"><code>TwitterStreamChannelsMock</code></h3>
+        
+                <div class="args">
+                    <span class="paren">(</span><ul class="args-list inline commas">
+                        <li class="arg">
+                                <code class="optional">[options]</code>
+                        </li>
+                    </ul><span class="paren">)</span>
+                </div>
+        
+                <span class="returns-inline">
+                    <span class="type"><a href="../classes/TwitterStreamChannelsMock.html" class="crosslink">TwitterStreamChannelsMock</a></span>
+                </span>
+        
+        
+        
+        
+        
+        
+        
+          </div>
+            <div class="description">
+              <h3>Summary</h3>
+                
+            </div>
+        
+                <div class="params">
+                    <h4>Parameters:</h4>
+        
+                    <ul class="params-list">
+                        <li class="param">
+                                <code class="param-name optional">[options]</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                <span class="flag optional" title="This parameter is optional.">optional</span>
+        
+        
+                            <div class="param-description">
+                                <p>@optional (since it's a mock, no credentials needed</p>
+        
+                            </div>
+        
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name optional">[tweets]</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/File" class="crosslink external" target="_blank">File</a></span>
+                                            <span class="flag optional" title="This parameter is optional.">optional</span>
+        
+                                        <div class="param-description">
+                                            <p>@optional (by default will load <code>/mocks/data/tweets.json</code>)</p>
+        
+                                        </div>
+        
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name optional">[singleRun=true]</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                            <span class="flag optional" title="This parameter is optional.">optional</span>
+        
+                                        <div class="param-description">
+                                            <p>@optional if false will loop on the tweets mock array until you call stop (default true)</p>
+        
+                                        </div>
+        
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name optional">[tweetDelay=100]</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                            <span class="flag optional" title="This parameter is optional.">optional</span>
+        
+                                        <div class="param-description">
+                                            <p>@optional delay between each tweets emitted in ms (default 100ms)</p>
+        
+                                        </div>
+        
+                                    </li>
+                                </ul>
+                        </li>
+                    </ul>
+                </div>
+        
+                <div class="returns">
+                    <h4>Returns:</h4>
+        
+                    <div class="returns-description">
+                        <span class="type"><a href="../classes/TwitterStreamChannelsMock.html" class="crosslink">TwitterStreamChannelsMock</a></span>:
+        
+        
+                    </div>
+                </div>
+        
+        
+        </div>
+    </div>
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method">
+                                <a href="#method_getApiClient">getApiClient</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_streamChannels">streamChannels</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+
+        </div>
+
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                    <div id="method_getApiClient" class="method item">
+                      <h3 class="blue-method-name">getApiClient</h3>
+                    
+                      <div class="meta method-meta">
+                          <p>
+                              Defined in
+                          <a href="../files/mocks_TwitterStreamChannels.js.html#l162"><code>mocks&#x2F;TwitterStreamChannels.js:162</code></a>
+                      </p>
+                    
+                    
+                    
+                      </div>
+                    
+                      <h3>Syntax</h3>
+                      <div class="blue-method-syntax">
+                      <h3 class="name"><code>getApiClient</code></h3>
+                    
+                            <span class="paren">()</span>
+                    
+                            <span class="returns-inline">
+                                <span class="type">TwitMock</span>
+                            </span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                      </div>
+                        <div class="description">
+                          <h3>Summary</h3>
+                            <p>Returns a mocked version of apiClient, only the .stream() method is mocked (will stream exactly the same tweets as <a href="../classes/TwitterStreamChannelsMock.html#method_streamChannels" class="crosslink">stream.streamChannels()</a>)</p>
+                    
+                        </div>
+                    
+                    
+                            <div class="returns">
+                                <h4>Returns:</h4>
+                    
+                                <div class="returns-description">
+                                    <span class="type">TwitMock</span>:
+                    
+                    
+                                </div>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="method_streamChannels" class="method item">
+                      <h3 class="blue-method-name">streamChannels</h3>
+                    
+                      <div class="meta method-meta">
+                          <p>
+                              Defined in
+                          <a href="../files/mocks_TwitterStreamChannels.js.html#l171"><code>mocks&#x2F;TwitterStreamChannels.js:171</code></a>
+                      </p>
+                    
+                    
+                    
+                      </div>
+                    
+                      <h3>Syntax</h3>
+                      <div class="blue-method-syntax">
+                      <h3 class="name"><code>streamChannels</code></h3>
+                    
+                            <div class="args">
+                                <span class="paren">(</span><ul class="args-list inline commas">
+                                    <li class="arg">
+                                            <code>options</code>
+                                    </li>
+                                </ul><span class="paren">)</span>
+                            </div>
+                    
+                            <span class="returns-inline">
+                                <span class="type"><a href="../classes/StreamChannels.html" class="crosslink">StreamChannels</a></span>
+                            </span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                      </div>
+                        <div class="description">
+                          <h3>Summary</h3>
+                            <p>Mocks the <a href="../classes/TwitterStreamChannels.html#method_streamChannels" class="crosslink">TwitterStreamChannels.streamChannels(options)</a> method of TwitterStreamChannels to return a StreamChannels object</p>
+                    <p>Will start to emit the tweets you specified in the tweets attributes in the constructor.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">options</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                             
+                                        </div>
+                    
+                                            <ul class="params-list">
+                                                <li class="param">
+                                                        <code class="param-name">track</code>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                    
+                                                    <div class="param-description">
+                                                        <p>Pass an object describing your channels. If you don't want to use channels, you can pass directly an array of keywords.</p>
+                    
+                                                    </div>
+                    
+                                                </li>
+                                                <li class="param">
+                                                        <code class="param-name optional">[enableChannelsEvents=true]</code>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+                                                    <div class="param-description">
+                                                        <p>If true, will fire the events like 'channels/channelName'</p>
+                    
+                                                    </div>
+                    
+                                                </li>
+                                                <li class="param">
+                                                        <code class="param-name optional">[enableRootChannelsEvent=true]</code>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+                                                    <div class="param-description">
+                                                        <p>If true, will fire the event 'channels'</p>
+                    
+                                                    </div>
+                    
+                                                </li>
+                                                <li class="param">
+                                                        <code class="param-name optional">[enableKeywordsEvents=false]</code>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+                                                    <div class="param-description">
+                                                        <p>If true, will fire the events 'keywords/keywordName' (disabled by default)</p>
+                    
+                                                    </div>
+                    
+                                                </li>
+                                            </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                            <div class="returns">
+                                <h4>Returns:</h4>
+                    
+                                <div class="returns-description">
+                                    <span class="type"><a href="../classes/StreamChannels.html" class="crosslink">StreamChannels</a></span>:
+                    
+                    
+                                </div>
+                            </div>
+                    
+                    
+                    </div>
+            </div>
+
+
+
+    </div>
+</div>
+
+
+</div>
+</div>
+</div>
+        </div>
+    </div>
+</div>
+<footer class="copyright">
+  <div class="twitter-button">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://github.com/topheman/twitter-stream-channels" data-text="Simple keyword post-processing #twitterstreamchannels #nodejs on the #stream API" data-via="topheman" data-size="large" data-count="none">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </div>
+  ©2014-2015 <a href="http://labs.topheman.com/">labs.topheman.com</a> - Christophe Rosset
+</footer>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+<script>
+  document.getElementById('hd').addEventListener('click',function(){
+    window.location.href = "../";
+  },false);
+</script>
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+<script>var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-868601-6']);
+    _gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();</script>
+</body>
+</html>
