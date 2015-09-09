@@ -157,8 +157,4 @@ You can do anything the Twitter API offers, via the twit client which is exposed
 		* continuous : `npm run test-watch` (I set it up but don't use it for the moment)
 	* online tests (needs the connexion to Twitter to use the streaming API) : make sure you set your credentials in the `twitter.credentials.json` file. Don't run them too many times (if you attempt too much connexion, your IP could be black listed from Twitter) :
 		* single run : `npm run test-online` (none for the moment and not so sure there should be any)
-* How to generate the doc :
-	* Once :
-		* Make sure you have yuidoc, if not `npm install yuidocjs -g`
-		* Install the theme dependencies : `cd extras/yuidoc-theme-blue` then `npm install`
-	* After that, at the root, just run `npm run yuidoc`
+* How to generate the doc : `npm run yuidoc` will generate doc into `./yuidoc` directory

@@ -11,6 +11,6 @@
       "./mocks"
     ],
     "outdir": "./yuidoc",
-    "themedir" : "./extras/yuidoc-theme-blue"
+    "themedir" : "./extras/yuidoc-theme-topheman"
   }
 }
