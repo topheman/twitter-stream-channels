@@ -25,12 +25,13 @@
   "main": "./lib/TwitterStreamChannels",
   "scripts": {
     "yuidoc": "node_modules/.bin/yuidoc -c yuidoc.json --project-version 0.2.4",
-    "test": "jasmine-node spec/offline --verbose --config highSpeed true",
-    "test-watch": "jasmine-node spec/offline --autotest --config highSpeed true --watch .",
-    "test-online": "jasmine-node spec/online --verbose"
+    "test": "node_modules/.bin/jasmine-node spec/offline --verbose --config highSpeed true",
+    "test-watch": "node_modules/.bin/jasmine-node spec/offline --autotest --config highSpeed true --watch .",
+    "test-online": "node_modules/.bin/jasmine-node spec/online --verbose"
   },
   "homepage": "http://labs.topheman.com/twitter-stream-channels/",
   "devDependencies": {
+    "jasmine-node": "^1.14.5",
     "yuidocjs": "^0.9.0"
   }
 }
