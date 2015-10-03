@@ -1,6 +1,7 @@
 twitter-stream-channels
 =======================
 
+[![npm version](https://badge.fury.io/js/twitter-stream-channels.svg)](https://www.npmjs.com/package/twitter-stream-channels)
 [![Build Status](https://travis-ci.org/topheman/twitter-stream-channels.svg?branch=master)](https://travis-ci.org/topheman/twitter-stream-channels)
 
 With the Twitter stream API, you can only open one stream at a time. So, if you have multiple filters, the tweets in result will be mixed up, you'll need to do some post-processing.
@@ -11,13 +12,14 @@ twitter-stream-channels handles all the post-processing, the connexion layer (OA
 
 You can see [Topheman Datavisual](http://topheman-datavisual.herokuapp.com/) which is a project I made, using this module for the Twitter Stream part.
 
-##Installation
+## Installation
 
 Just run `npm install twitter-stream-channels`
 
-##Example :
+## Example :
 
-file `my.twitter.credentials.json`
+file: `my.twitter.credentials.json`
+
 ```js
 {
 	"consumer_key": "XXXXX",
@@ -26,7 +28,9 @@ file `my.twitter.credentials.json`
 	"access_token_secret": "XXXXX"
 }
 ```
-example
+
+example:
+
 ```js
 var TwitterStreamChannels = require('twitter-stream-channels');
 var credentials = require('./my.twitter.credentials.json');
@@ -70,7 +74,7 @@ setTimeout(function(){
 },100000);
 ```
 
-##API
+## API
 
 You can find an API doc generated from the source code on [http://labs.topheman.com/twitter-stream-channels/](http://labs.topheman.com/twitter-stream-channels/ "http://labs.topheman.com/twitter-stream-channels/").
 
@@ -101,15 +105,15 @@ var client = new TwitterStreamChannelsMocked({
 
 I use it for the unit tests of the module as well as when I code some application based on it.
 
-##FAQ
+## FAQ
 
-####To what events can I subscribe ?
+#### To what events can I subscribe ?
 
 * `.on('channels')` : will listen to all the incoming tweets
 * `.on('channels/languages')` : will only listen to the tweets where the keywords from the channel "languages" were matched (like javascript, java, php, python or perl)
 * `.on('keywords/angularjs')` : will only listen to the tweets where the keyword "angularjs" was matched
 
-####Where do I find out the matched keywords and channels ?
+#### Where do I find out the matched keywords and channels ?
 
 Two attributes are added to the tweet you retrieve :
 
@@ -117,11 +121,11 @@ Two attributes are added to the tweet you retrieve :
 * $keywords : an array of all the keywords you're following that were matched on this tweet.
 
 
-####The matched keywords are lower cased, why ?
+#### The matched keywords are lower cased, why ?
 
 Since the Twitter streaming filter API is case-insensitive, I lower case before matching, so the keywords matched you will find in `tweet.$channels['yourChannel']` are lower cased.
 
-####How much of post-processing does this cover ?
+#### How much of post-processing does this cover ?
 
 As specified in the [Twitter streaming API](https://dev.twitter.com/docs/streaming-apis/parameters#track) :
 
@@ -129,27 +133,25 @@ As specified in the [Twitter streaming API](https://dev.twitter.com/docs/streami
 
 So I match your keywords not only against tweet.text but also against `expanded_url`, `display_url` and `screen_name` when they are available (this is a work you won't have to bother to do ...)
 
-####How to unsubscribe ?
+#### How to unsubscribe ?
 
 The object returned by `(new require('twitter-stream-channels')(credentials)).streamChannels(options)` extends the standard [events.EventEmitter of nodejs](http://nodejs.org/api/events.html), so you can use `on()`, `off()`, `addEventListener()` ...
 
-####I can't connect to Twitter, or I have disconnections, how about that ?
+#### I can't connect to Twitter, or I have disconnections, how about that ?
 
 * First : check your credentials.
 * Second : have tried too many times to connect ? Wait a couple of minutes.
 
 If this persists, you can file an issue. But know that the twitter-stream-channels modules doesn't handle itself the network layer. It relies on [twit](https://github.com/ttezel/twit) for this part, so check if that doesn't come from it. If twit is upgraded with fixes, I will upgrade my module.
 
-####Can I also use this module for other parts of the Twitter API than only streams ?
+#### Can I also use this module for other parts of the Twitter API than only streams ?
 
 You can do anything the Twitter API offers, via the twit client which is exposed by getApiClient(). Once you retrieved the root client, you can call the API exposed by [twit](https://github.com/ttezel/twit) to interract with Twitter.
 
-##For contributors
+## For contributors
 
 * Installation :
 	* Once you've git cloned this repo, just `npm install` to install the dependencies.
-	* If you don't have jasmine-node globally, run `sudo npm install jasmine-node@1.14.2 -g` (specified version - for the moment last version is buggy) to install the jasmine framework + test runner for node that will let you run the unit tests
-	* If you plan to generate doc, and don't have yuidoc gobally, run `npm install yuidocjs -g`
 	* If you want to execute the examples or online tests, copy `twitter.credentials.default.json` to `twitter.credentials.json`, set your own credentials (you can get some at [https://apps.twitter.com/app/new](https://apps.twitter.com/app/new) if you don't have any already)
 * How to run the tests : 
 	* offline tests (don't need AND won't create any connexion to Twitter) - run them as many time as you want :
