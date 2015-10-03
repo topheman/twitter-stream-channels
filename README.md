@@ -148,6 +148,13 @@ If this persists, you can file an issue. But know that the twitter-stream-channe
 
 You can do anything the Twitter API offers, via the twit client which is exposed by getApiClient(). Once you retrieved the root client, you can call the API exposed by [twit](https://github.com/ttezel/twit) to interract with Twitter.
 
+#### Can I upgrade to v1 from v0.x ?
+
+Yes, the v1 version does not introduce any breaking changes to the twitter-stream-channels API. The reasons of the version bump:
+
+* Upgrade to latest version of [twit](https://github.com/ttezel/twit) (library handling twitter API)
+* Made sure of the compatibility with both v0.12.x & v4 of node
+
 ## For contributors
 
 * Installation :

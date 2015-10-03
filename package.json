@@ -1,6 +1,6 @@
 {
   "name": "twitter-stream-channels",
-  "version": "0.2.4",
+  "version": "1.0.0",
   "description": "Manage multiple filters on the same Twitter stream",
   "keywords": [
     "twitter",

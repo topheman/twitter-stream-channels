@@ -3,7 +3,7 @@
         "name": "twitter-stream-channels",
         "description": "Manage multiple channel search on the same Twitter Stream",
         "url": "http://labs.topheman.com/",
-        "version": "0.2.4"
+        "version": "1.0.0"
     },
     "files": {
         "lib/MockDataRetriever.js": {
