@@ -29,8 +29,8 @@
     "test-watch": "node_modules/.bin/jasmine-node spec/offline --autotest --config highSpeed true --watch .",
     "test-online": "node_modules/.bin/jasmine-node spec/online --verbose"
   },
-  "yuidoc":{
-    "options":{
+  "yuidoc": {
+    "options": {
       "linkNatives": "true",
       "attributesEmit": "false",
       "selleck": "false",
@@ -39,7 +39,7 @@
         "./mocks"
       ],
       "outdir": "./yuidoc",
-      "themedir" : "./extras/yuidoc-theme-topheman"
+      "themedir": "./extras/yuidoc-theme-topheman"
     }
   },
   "homepage": "http://labs.topheman.com/twitter-stream-channels/",

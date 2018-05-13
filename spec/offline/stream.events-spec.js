@@ -41,36 +41,36 @@ describe('client.streamChannels(options) - events (offline)',function(){
       });
 
       waitsFor(function(){
-        if(trappedTweets.length >= 10){
+        if(trappedTweets.length >= 35){
           stream.stop();
           return true;
         }
-      },"should have trapped 10 tweets",10000);
+      },"should have trapped 35 tweets",10000);
       
     });
     
-    it('should have trapped at least 10 tweets via the callback on the event',function(){
-      expect(trappedTweets.length).toBeGreaterThanOrEqualTo(10);
+    it('should have trapped at least 35 tweets via the callback on the event',function(){
+      expect(trappedTweets.length).toBeGreaterThanOrEqualTo(35);
     });
     
-    it('should have trapped tweets with $channels',function(){
+    it('should have trapped tweets with $channels (extended tweet or not)',function(){
       expect(trappedTweets[0].$channels).toBeDefined();
-      expect(trappedTweets[9].$channels).toBeDefined();
+      expect(trappedTweets[35].$channels).toBeDefined();
     });
     
-    it('$channels should have correct keywords in it',function(){
-      expect(trappedTweets[0].$channels['colors']).toEqual(['green']);
-      expect(trappedTweets[9].$channels['fruits']).toEqual(['apple']);
+    it('$channels should have correct keywords in it (extended tweet or not)',function(){
+      expect(trappedTweets[0].$channels['colors']).toEqual(['white']);
+      expect(trappedTweets[35].$channels['fruits']).toEqual(['kiwi']);
     });
     
-    it('should have trapped tweets with $keywords',function(){
-      expect(trappedTweets[0].$keywords).toBeDefined();
-      expect(trappedTweets[9].$keywords).toBeDefined();
+    it('should have trapped tweets with $keywords (extended tweet or not)',function(){
+      expect(trappedTweets[2].$keywords).toBeDefined();
+      expect(trappedTweets[7].$keywords).toBeDefined();
     });
     
-    it('$keywords should have correct keywords in it',function(){
-      expect(trappedTweets[0].$keywords).toEqual(['green']);
-      expect(trappedTweets[9].$keywords).toEqual(['apple']);
+    it('$keywords should have correct keywords in it (extended tweet or not)',function(){
+      expect(trappedTweets[2].$keywords).toEqual(['han']);
+      expect(trappedTweets[7].$keywords).toEqual(['white']);
     });
     
   });
